@@ -13,7 +13,7 @@ B3: git push -u origin master -> push lên master của github
 
 ---Chú ý:
 -> Trước khi code hãy ĐẢM BẢO đã lấy code mới nhất trên github, dùng lệnh 'git pull' để lấy code về máy sau đó mới code.
--> Branch chính là 'main', đừng nhầm lẫn :>
+-> Branch chính là 'master', đừng nhầm lẫn :>
 
 
 
