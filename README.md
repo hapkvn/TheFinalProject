@@ -4,7 +4,7 @@
 ---Cách Clone dự án về máy:
 B1: Tải git -> Đăng nhập
 B2: Mở CMD ở folder muốn để -> Nhập lệnh git sau: 
--> git clone https://github.com/hapkvn/TheFinalProject
+-> git clone https://github.com/hapkvn/TheFinalProject.git
 
 ---Cách Push lên github:
 B1: git add [Tên thư mục hay file mà chưa có trên github] -> VD: 'git add .', "." thêm tất cả file chưa có vào local git.
