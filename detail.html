@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Hoàng Vũ Computer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- React và Babel -->
+<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/react-router-dom@5.3.0/umd/react-router-dom.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+ 
+<!-- jQuery và Popper.js từ CDN -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+ 
+<!-- Bootstrap JS từ CDN -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+    <style type="text/css">
+        .bloc_left_price {
+            color: #c01508;
+            text-align: center;
+            font-weight: bold;
+            font-size: 150%;
+        }
+        .category_block li:hover {
+            background-color: #007bff;
+        }
+        .category_block li:hover a {
+            color: #ffffff;
+        }
+        .category_block li a {
+            color: #380c0c;
+        }
+        .add_to_cart_block .price {
+            color: #c01508;
+            text-align: center;
+            font-weight: bold;
+            font-size: 200%;
+            margin-bottom: 0;
+        }
+        .add_to_cart_block .price_discounted {
+            color: #343a40;
+            text-align:left;
+            text-decoration: line-through;
+            font-size: 140%;
+        }
+        .product_rassurance {
+            padding: 5%;
+            margin-top: 15px;
+            background: #ffffff;
+            border: 1px solid #6c757d;
+            color: #6c757d;
+        }
+        .product_rassurance .list-inline {
+            margin-bottom: 0;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .product_rassurance .list-inline li:hover {
+            color: #343a40;
+        }
+        .reviews_product .fa-star {
+            color: gold;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        footer {
+            background: #343a40;
+            padding: 40px;
+        }
+        footer a {
+            color: #f8f9fa!important
+        }
+ 
+    /* Toast positioning */
+    .toast {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1055;
+        display: none;
+    }
+    .custom-toast-body {
+    background-color: #d1e7dd; /* Màu xanh lá nhạt dễ nhìn */
+    border-left: 5px solid #0f5132; /* Đậm hơn cho nổi bật */
+    border-radius: 4px;
+    font-weight: 500;
+}
+ 
+</style>
+ 
+    </style>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="TrangChu.html">Hoangvu.vn</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="TrangChu.html">Trang chủ</a>
+                </li>
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="/products.html#/category/laptop">Sản phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html">Giỏ hàng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.facebook.com/v.liquid.9">Liên hệ</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <a class="btn btn-success btn-sm ml-3" href="cart.html">
+                    <i class="fa fa-shopping-cart"></i>
+                   <span id="cartCount" class="badge badge-light">0</span>
+                </a>
+            </form>
+        </div>
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Hoàng Vũ</h1>
+    </div>
+</section>
+ 
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="TrangChu.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="/products.html#/category/laptop">Danh sách phân loại</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
+                </ol>
+                <div class="reviews_product">
+                    <b>
+                   Laptop chính hãng
+                    </b>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+ 
+<div class="container">
+    <div class="row">
+        <!-- Image Carousel -->
+        <div class="col-12 col-lg-6">
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <div id="productCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+    <div class="carousel-inner" id="carouselInner"></div>
+    <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Trước</span>
+    </a>
+    <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Tiếp</span>
+    </a>
+</div>
+ 
+ 
+                    <p class="text-center mt-2">
+                        <a href="" data-toggle="modal" data-target="#productModal">Quan sát chi tiết sản phẩm</a>
+                    </p>
+                    <!-- Mô tả sát nút Thêm vào giỏ -->
+                  <div id="product-description" class="border rounded p-3 bg-light small mt-2"></div>
+                </div>
+            </div>
+        </div>
+ 
+        <!-- Add to cart -->
+        <div class="col-12 col-lg-6 add_to_cart_block">
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <p class="price">99.00 $</p>
+                    <p class="price_discounted">149.90 $</p>
+                    <form method="get" action="cart.html">
+                        <div class="form-group">
+                            <label for="colors">Color</label>
+                            <select class="custom-select" id="colors">
+                                <option selected>Chọn màu...</option>
+                                <option value="1">Titan Tự Nhiên</option>
+                                <option value="2">Titan Đen</option>
+                                <option value="3">Titan trắng</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Số lượng :</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="quantity">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control"  id="quantity" name="quantity" min="1" max="100" value="1">
+                                <div class="input-group-append">
+                                    <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="quantity">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="btnAddToCart" class="btn btn-success btn-lg btn-block text-uppercase">
+                            <i class="fa fa-shopping-cart"></i> Thêm vào giỏ
+                            <button id="buyNowBtn" class="btn btn-danger flex-fill">Mua ngay</button>
+                        </button>
+                    </form>
+                    <div class="product_rassurance">
+                        <!-- Shipping Info Form -->
+<div id="shippingForm" class="p-3 border mt-2 bg-light" style="display: none;">
+    <h5>Thông tin vận chuyển</h5>
+    <div class="form-group">
+        <label>Họ và tên:</label>
+        <input type="text" class="form-control" placeholder="Nhập họ tên">
+    </div>
+    <div class="form-group">
+        <label>Địa chỉ:</label>
+        <input type="text" class="form-control" placeholder="Nhập địa chỉ giao hàng">
+    </div>
+    <div class="form-group">
+        <label>Số điện thoại:</label>
+        <input type="tel" class="form-control" placeholder="Nhập số điện thoại">
+    </div>
+</div>
+ 
+<!-- Payment Info Form -->
+<div id="paymentForm" class="p-3 border mt-2 bg-light" style="display: none;">
+    <h5>Thông tin thanh toán</h5>
+    <div class="form-group">
+        <label>Tên chủ thẻ:</label>
+        <input type="text" class="form-control" placeholder="Tên in trên thẻ">
+    </div>
+    <div class="form-group">
+        <label>Số thẻ:</label>
+        <input type="text" class="form-control" placeholder="1234 5678 9012 3456">
+    </div>
+    <div class="form-group">
+        <label>Ngày hết hạn:</label>
+        <input type="text" class="form-control" placeholder="MM/YY">
+    </div>
+    <div class="form-group">
+        <label>Mã CVV:</label>
+        <input type="text" class="form-control" placeholder="CVV">
+    </div>
+</div>
+ 
+                        <ul class="list-inline">
+                            <li class="list-inline-item" id="shippingInfo"><i class="fa fa-truck fa-2x"></i><br/>Vận chuyển nhanh</li>
+                            <li class="list-inline-item" id="paymentInfo"><i class="fa fa-credit-card fa-2x"></i><br/>Thanh toán bằng thẻ tín dụng</li>
+                            <li class="list-inline-item"><a href="tel:+94122546560" class="text-dark"><i class="fa fa-phone fa-2x"></i><br/>+94 1 22 54 65 60</a></li>
+ 
+                        </div>
+                        </ul>
+                    </div>
+                    <div class="reviews_product p-3 mb-2">
+                        3 reviews
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        (4/5)
+                        <a class="pull-right" href="#reviews">View all reviews</a>
+                    </div>
+                    <div class="datasheet p-3 mb-2 bg-info text-white">
+                        <a href="" class="text-white"><i class="fa fa-file-text"></i> Các bình luận phản hồi về sản phẩm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- Toast notification -->
+<div class="toast" id="addToCartToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-success text-white">
+        <strong class="me-auto"><i class="fa fa-check-circle"></i> Thêm vào giỏ</strong>
+       
+        <button type="button" class="ml-2 mb-1 close text-white" data-bs-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body p-0">
+        <div class="custom-toast-body p-3 text-dark">
+            ✅ Sản phẩm đã được thêm vào giỏ hàng!
+        </div>
+    </div>
+</div>
+ 
+ 
+ 
+<footer class="text-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-lg-3 col-xl-3">
+                <h5>About</h5>
+                <hr class="bg-white mb-2 mt-0">
+                <p class="mb-0">Lorem ipsum dolor sit amet...</p>
+            </div>
+            <div class="col-md-4 col-lg-3 col-xl-3">
+                <h5>Contact</h5>
+                <hr class="bg-white mb-2 mt-0">
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-home"></i> My Company</li>
+                    <li><i class="fa fa-envelope"></i> email@example.com</li>
+                    <li><i class="fa fa-phone"></i> +33 12 14 15 16</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+ 
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Quantity increase and decrease
+    document.querySelector('.quantity-right-plus').addEventListener('click', function (e) {
+        e.preventDefault();
+        var quantity = parseInt(document.getElementById('quantity').value);
+        document.getElementById('quantity').value = quantity + 1;
+    });
+ 
+    document.querySelector('.quantity-left-minus').addEventListener('click', function (e) {
+        e.preventDefault();
+        var quantity = parseInt(document.getElementById('quantity').value);
+        if (quantity > 1) {
+            document.getElementById('quantity').value = quantity - 1;
+        }
+    });
+ 
+    // Show Toast when Add to Cart button is clicked
+    document.getElementById('btnAddToCart').addEventListener('click', function () {
+        var toastEl = document.getElementById('addToCartToast');
+        toastEl.style.display = 'block'; // ensure it shows
+        var toast = new bootstrap.Toast(toastEl);
+        toast.show();
+        var toastEl = new bootstrap.Toast(document.getElementById('addToCartToast'));
+    toastEl.show();
+ 
+    // Cập nhật số lượng giỏ hàng
+    var quantity = parseInt(document.getElementById('quantity').value) || 1;
+    var cartCountEl = document.getElementById('cartCount');
+    var currentCount = parseInt(cartCountEl.textContent) || 0;
+    cartCountEl.textContent = currentCount + quantity;
+        // Optional: auto-hide after 3s
+        setTimeout(() => {
+            toast.hide();
+        }, 3000);
+    });
+    // Toggle Shipping Form
+document.getElementById("shippingInfo").addEventListener("click", function () {
+    const form = document.getElementById("shippingForm");
+    const paymentForm = document.getElementById("paymentForm");
+    form.style.display = form.style.display === "none" ? "block" : "none";
+    paymentForm.style.display = "none"; // ẩn cái còn lại
+});
+ 
+// Toggle Payment Form
+document.getElementById("paymentInfo").addEventListener("click", function () {
+    const form = document.getElementById("paymentForm");
+    const shippingForm = document.getElementById("shippingForm");
+    form.style.display = form.style.display === "none" ? "block" : "none";
+    shippingForm.style.display = "none";
+});
+document.getElementById('buyNowBtn').addEventListener('click', function () {
+    // Scroll xuống form thanh toán
+    document.getElementById('checkoutForm').scrollIntoView({ behavior: 'smooth' });
+ 
+    // Tự động focus vào ô họ tên sau khi cuộn
+    setTimeout(() => {
+        document.getElementById('name').focus();
+    }, 600);
+});
+ 
+</script>
+<script type="text/javascript">
+    function getProductIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return parseInt(params.get('id'), 10);
+    }
+ 
+    async function loadProductDetail() {
+        const id = getProductIdFromUrl();
+        const response = await fetch('data.json');
+        const data = await response.json();
+        const product = data.products.find(p => p.id === id);
+ 
+        if (!product) {
+            alert('Không tìm thấy sản phẩm!');
+            return;
+        }
+ 
+        // Cập nhật tiêu đề và giá
+        document.querySelector('.jumbotron-heading').textContent = product.name;
+        document.querySelector('.reviews_product b').textContent = product.name;
+        document.querySelector('.price').textContent = product.price;
+ 
+        // Hình ảnh chính
+        const carouselInner = document.querySelector('.carousel-inner');
+        carouselInner.innerHTML = `
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="${product.image}" alt="${product.name}">
+            </div>
+        `;
+ 
+        // Thông tin sản phẩm: mô tả chi tiết
+        const infoSection = document.getElementById('product-description');
+        infoSection.innerHTML = `
+            <div class="text-primary fw-semibold mb-2" style="font-size: 0.95rem;">
+                <i class="fa fa-info-circle me-1"></i> Thông tin sản phẩm
+            </div>
+            <ul class="list-unstyled mb-0">
+                <li>📝 <strong>Mô tả:</strong> ${product.description}</li>
+                <li>✅ Tình trạng: Còn hàng (${product.stock} sản phẩm)</li>
+                <li>📦 Hỗ trợ giao hàng toàn quốc</li>
+                <li>🛠 Bảo hành 12 tháng tại trung tâm chính hãng</li>
+                <li>💰 Giá bao gồm VAT</li>
+            </ul>
+        `;
+    }
+ 
+    window.addEventListener('DOMContentLoaded', loadProductDetail);
+</script>
+ 
+<script type="text/javascript">
+    function getProductIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return parseInt(params.get('id'), 10);
+    }
+ 
+    async function loadProductDetail() {
+        const id = getProductIdFromUrl();
+        const response = await fetch('data.json');
+        const data = await response.json();
+        const product = data.products.find(p => p.id === id);
+ 
+        if (!product) {
+            alert('Không tìm thấy sản phẩm!');
+            return;
+        }
+ 
+        // Cập nhật tiêu đề và giá
+        document.querySelector('.jumbotron-heading').textContent = product.name;
+        document.querySelector('.reviews_product b').textContent = product.name;
+        document.querySelector('.price').textContent = product.price;
+ 
+        // Hình ảnh carousel
+        const carouselInner = document.querySelector('.carousel-inner');
+        carouselInner.innerHTML = ''; // Xóa nội dung carousel cũ
+ 
+        // Lặp qua mảng images và tạo carousel items
+        product.images.forEach((image, index) => {
+            const isActive = index === 0 ? 'active' : ''; // Đảm bảo ảnh đầu tiên được hiển thị đầu tiên
+            const carouselItem = `
+                <div class="carousel-item ${isActive}">
+                    <img class="d-block w-100" src="${image}" alt="Product Image ${index + 1}">
+                </div>
+            `;
+            carouselInner.innerHTML += carouselItem;
+        });
+ 
+        // Cập nhật mô tả sản phẩm
+        document.getElementById('product-description').textContent = product.description;
+    }
+ 
+    // Gọi hàm khi trang được tải
+    loadProductDetail();
+</script>
+<script>
+  fetch('data.json')
+  .then(res => res.json())
+  .then(data => {
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get('id'));
+    const product = data.products.find(p => p.id === id);
+ 
+    if (product && Array.isArray(product.images)) {
+      const carouselInner = document.getElementById('carouselInner');
+      carouselInner.innerHTML = product.images.map((img, index) => `
+        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+          <img src="${img}" class="d-block w-100" alt="Ảnh sản phẩm">
+        </div>
+      `).join('');
+    }
+  });
+ 
+</script>
+ 
+ 
+</body>
+</html>
