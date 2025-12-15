@@ -41,14 +41,14 @@ const Headers = () => {
         <div className="header-left">
           <ul>
             <li>
-            <a href="TrangChu.html">hoangvu.vn</a>
+            <a href="TrangChu.html">laptopVip</a>
             <span>0123 456 789</span>
           </li>
           </ul>
           <ul>
             <ul className="navbar-nav m-auto">
               <li className="nav-item">
-                <a className="nav-link" href="TrangChu.html">Trang chủ</a>
+                <a className="nav-link" href="index.html">Trang chủ</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/products.html#/category/laptop">Sản phẩm</a>
