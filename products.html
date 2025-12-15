@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sản phẩm | hoangvu.vn</title>
-  <link rel="stylesheet" href="css/product.css" />
+  <link rel="stylesheet" href="assets/css/product.css" />
+  <link rel="stylesheet" href="assets/css/Chung.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <meta name="description" content="Trang sản phẩm - hoangvu.vn" />
@@ -19,6 +20,7 @@
   <script src="public/frontend/js/jquery-3.2.1.slim.min.js"></script>
   <script src="public/frontend/js/popper.min.js"></script>
   <script src="public/frontend/js/bootstrap.min.js"></script>
+  <script type="text/babel" src="js/menu.js"></script>
 </head>
 <body>
   <div id="root"></div>
@@ -53,20 +55,7 @@
       return (
         <div className="content">
           {/* DANH MỤC */}
-          <div className="menu">
-            <div className="menu-header">
-              <li><i className="fas fa-bars"></i> DANH MỤC</li>
-            </div>
-            <ul className="menu-danhmuc">
-              {categories.map((cat) => (
-                <li key={cat.id}>
-                  <Link to={`/category/${cat.slug}`}>
-                    <i className={cat.icon}></i> {cat.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Menu />
  
           {/* SẢN PHẨM */}
           <div className="left">

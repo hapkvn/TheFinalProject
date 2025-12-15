@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trang chủ | hoangvu.vn</title>
-  <link rel="stylesheet" href="css/sources.css" />
+  <link rel="stylesheet" href="assets/css/sources.css" />
+  <link rel="stylesheet" href="assets/css/Chung.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <meta name="description" content="Website hoangvu.vn - Chuyên laptop Gaming, Văn phòng, Lập trình, Macbook, linh kiện và phụ kiện máy tính." />
@@ -20,6 +21,8 @@
   <script src="public/frontend/js/popper.min.js"></script>
   <script src="public/frontend/js/bootstrap.min.js"></script>
 </head>
+
+
 <body>
   <!-- Gốc React -->
   <div id="root"></div>
@@ -27,7 +30,8 @@
   <!-- Component JSX -->
   <script type="text/babel" src="js/head.js"></script>
   <script type="text/babel" src="js/footer.js"></script>
-  <script type="text/babel" src="js/ProductList.js"></script> 
+  <script type="text/babel" src="js/ProductList.js"></script>
+  <script type="text/babel" src="js/menu.js"></script>
 
   <!-- Nội dung trang React -->
   <script type="text/babel">
@@ -44,24 +48,9 @@
   }, []);
 
   return (
+    
     <div className="content">
-      <div className="menu">
-        <div className="menu-header">
-          <li><i className="fas fa-bars"></i> DANH MỤC</li>
-        </div>
-        <ul className="menu-danhmuc">
-          <li><i className="fa-solid fa-laptop"></i> Máy tính xách tay</li>
-          <li><i className="fa-solid fa-gamepad"></i> Laptop Gaming - Đồ Họa</li>
-          <li><i className="fa-solid fa-briefcase"></i> Laptop Văn phòng</li>
-          <li><i className="fa-solid fa-code"></i> Laptop Lập trình</li>
-          <li><i className="fa-solid fa-laptop-medical"></i> Laptop cao cấp</li>
-          <li><i className="fa-brands fa-apple"></i> Apple Macbook</li>
-          <li><i className="fa-solid fa-memory"></i> RAM - SSD</li>
-          <li><i className="fa-solid fa-plug"></i> Kho phụ kiện</li>
-          <li><i className="fa-solid fa-truck-fast"></i> Công chuyển</li>
-          <li><i className="fa-solid fa-fan"></i> Tản nhiệt laptop</li>
-        </ul>
-      </div>
+      <Menu />
 
       <div className="left">
         <div className="khoi"></div>
@@ -83,89 +72,14 @@
 };
 
 
-const Product = () => (
-  <div className="box">
-    <div className="tenMuc">
-      <h2>Sản phẩm mới nhất</h2>
-    </div>
-    <ul>
-      <li>
-        <div className="item">
-          <img src="anh/img/8.jpg" alt="Sản phẩm 1" />
-          <div className="tieu_de">Một món hàng</div>
-          <div className="gia">
-            <div className="tien">457.000<sup>đ</sup></div>
-            <div className="giam">-10%</div>
-          </div>
-          <p className="details">
-            Bass mạnh mẽ, âm thanh sống động<br />
-            Thiết kế nhỏ gọn, dễ dàng mang theo<br />
-            Kết nối Bluetooth 5.0<br />
-            Thời gian sử dụng lên đến 20 giờ
-          </p>
-        </div>
-      </li>
-    </ul>
-     <ul>
-      <li>
-        <div className="item">
-          <img src="anh/img/44758_laptop_asus_vivobook_14_oled_a1405va_km095w__2_.jpg" alt="Sản phẩm 1" />
-          <div className="tieu_de">Một món hàng</div>
-          <div className="gia">
-            <div className="tien">457.000<sup>đ</sup></div>
-            <div className="giam">-10%</div>
-          </div>
-          <p className="details">
-            CPU: AMD Ryzen 7 8745HS<br />
-            RAM: 8GB DDR5 5600MHz<br />
-            Màn hình: 14″ FHD+ (1920x1200) IPS, 300nits<br />
-            Đồ họa: intel Iris Xe
-          </p>
-        </div>
-      </li>
-    </ul>
-     <ul>
-      <li>
-        <div className="item">
-          <img src="anh/img/3.webp" alt="Sản phẩm 1" />
-          <div className="tieu_de">Một món hàng</div>
-          <div className="gia">
-            <div className="tien">457.000<sup>đ</sup></div>
-            <div className="giam">-10%</div>
-          </div>
-          <p className="details">
-            CPU: AMD Ryzen 7 8745HS<br />
-            RAM: 16GB DDR5 5600MHz<br />
-            Màn hình: 15.6″ FHD+ (1920x1200) IPS, 300nits<br />
-            Đồ họa: AMD Radeon 780M, NVIDIA GeForce RTX 4060
-          </p>
-        </div>
-      </li>
-    </ul>
-     <ul>
-      <li>
-        <div className="item">
-          <img src="anh/img/4.png" alt="Sản phẩm 1" />
-          <div className="tieu_de">Một món hàng</div>
-          <div className="gia">
-            <div className="tien">457.000<sup>đ</sup></div>
-            <div className="giam">-10%</div>
-          </div>
-          <p className="details">
-            "Laptop phù hợp cho công việc văn phòng, thiết kế nhẹ và pin sử dụng lâu dài."
-          </p>
-        </div>
-      </li>
-    </ul>
-  </div>
-);
+
 
 const App = () => (
   <div>
     <Headers />
 
     <Content />
-    <Product />
+  
     <Footer />
   </div>
 );
