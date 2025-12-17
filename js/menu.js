@@ -1,22 +1,19 @@
+const { Link } = ReactRouterDOM;
+
 const Menu = () => {
   return (
-    <div className="menu">
-      <div className="menu-header">
-        {/* Lưu ý: thẻ li nên nằm trong ul/ol, nhưng giữ nguyên theo cấu trúc CSS hiện tại của bạn */}
-        <li><i className="fas fa-bars"></i> DANH MỤC</li>
+    <div className="menu-sidebar" style={{background: '#fff', border: '1px solid #ddd', minHeight: '300px'}}>
+      <div style={{background: '#eee', padding: '10px', fontWeight: 'bold'}}>
+        <i className="fa fa-bars"></i> DANH MỤC
       </div>
-      <ul className="menu-danhmuc">
-        <li><i className="fa-solid fa-laptop"></i> Máy tính xách tay</li>
-        <li><i className="fa-solid fa-gamepad"></i> Laptop Gaming - Đồ Họa</li>
-        <li><i className="fa-solid fa-briefcase"></i> Laptop Văn phòng</li>
-        <li><i className="fa-solid fa-code"></i> Laptop Lập trình</li>
-        <li><i className="fa-solid fa-laptop-medical"></i> Laptop cao cấp</li>
-        <li><i className="fa-brands fa-apple"></i> Apple Macbook</li>
-        <li><i className="fa-solid fa-memory"></i> RAM - SSD</li>
-        <li><i className="fa-solid fa-plug"></i> Kho phụ kiện</li>
-        <li><i className="fa-solid fa-truck-fast"></i> Công chuyển</li>
-        <li><i className="fa-solid fa-fan"></i> Tản nhiệt laptop</li>
+      <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
+        <li><Link to="/products" style={{display: 'block', padding: '10px', borderBottom: '1px solid #eee', color: '#333'}}>Tất cả sản phẩm</Link></li>
+        <li><Link to="/products?cat=gaming" style={{display: 'block', padding: '10px', borderBottom: '1px solid #eee', color: '#333'}}>Laptop Gaming</Link></li>
+        <li><Link to="/products?cat=macbook" style={{display: 'block', padding: '10px', borderBottom: '1px solid #eee', color: '#333'}}>Macbook Apple</Link></li>
+        <li><Link to="/products?cat=office" style={{display: 'block', padding: '10px', borderBottom: '1px solid #eee', color: '#333'}}>Laptop Văn phòng</Link></li>
       </ul>
     </div>
   );
 };
+
+window.Menu = Menu;

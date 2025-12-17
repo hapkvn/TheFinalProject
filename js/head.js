@@ -1,83 +1,40 @@
-const { useEffect } = React;
- 
+const { Link, useHistory } = ReactRouterDOM;
+
 const Headers = () => {
-  useEffect(() => {
-    const handleSearch = () => {
-      const keyword = document.querySelector(".search-box").value.trim();
-      if (keyword) {
-        window.location.href = `products.html?search=${encodeURIComponent(keyword)}`;
-      }
-    };
- 
-    const input = document.querySelector(".search-box");
-    const button = document.querySelector(".search-btn");
- 
-    if (button) {
-      button.addEventListener("click", handleSearch);
+  const history = useHistory();
+
+  // Xử lý khi bấm nút tìm kiếm
+  const handleSearch = () => {
+    const input = document.querySelector(".search-input");
+    if (input && input.value) {
+      history.push(`/products?search=${input.value}`);
     }
- 
-    if (input) {
-      input.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-          handleSearch();
-        }
-      });
-    }
- 
-    // Cleanup khi unmount
-    return () => {
-      if (button) {
-        button.removeEventListener("click", handleSearch);
-      }
-      if (input) {
-        input.removeEventListener("keypress", handleSearch);
-      }
-    };
-  }, []);
- 
+  };
+
   return (
-    <div className="wrapper">
-      <div className="header">
-        <div className="header-left">
-          <ul>
-            <li>
-            <a href="TrangChu.html">laptopVip</a>
-            <span>0123 456 789</span>
-          </li>
-          </ul>
-          <ul>
-            <ul className="navbar-nav m-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="index.html">Trang chủ</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/products.html#/category/laptop">Sản phẩm</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="cart.html">Giỏ hàng</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="contact.html">Liên hệ</a>
-              </li>
-            </ul>
-          </ul>
-          <div className="header-center">
-            <input
-              type="text"
-              placeholder="Tìm kiếm laptop bạn muốn..."
-              className="search-box"
-            />
-            <button className="search-btn">
-              <i className="fa fa-search"></i>
-            </button>
-          </div>
-          <div className="header-right">
-            <a href="#"><i className="fa fa-user"></i></a>
-            <a href="#"><i className="fa fa-shopping-cart"></i></a>
-          </div>
-        </div>
+    <div className="header">     
+
+      <div className="logo">
+          <Link to="/" >
+              LAPTOP VIP
+          </Link>
       </div>
-    </div>
+
+      {/* Menu Ngang */}
+      <div className="nav-links">
+          <Link to="/">Trang chủ</Link>
+          <Link to="/products">Sản phẩm</Link>
+          <Link to="/cart" >Giỏ hàng</Link>
+      </div>
+
+      {/* Tìm kiếm */}
+      <div className="search-box">
+          <input type="text" className="search-input" placeholder="Tìm máy tính..." />
+          <button onClick={handleSearch}>Tìm</button>
+      </div>
+  </div>
   );
 };
- 
+
+// Xuất component ra window
+window.Headers = Headers;

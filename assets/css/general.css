@@ -3,7 +3,7 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
-    background-color: #d8efff;
+    background-color: #ddeefa;
 }
 
 .wrapper {
@@ -14,105 +14,49 @@ body {
 
 .header {
     display: flex;
-    flex-direction: column; /* Thêm dòng này để chuyển sang dọc */
-    align-items: flex-start; /* Căn trái từng khối (hoặc center tùy ý) */
+    align-items: center;
+    justify-content: center;
     padding: 50px 40px;
     padding-top: 10px;
-    background-color: #ffffff;
+    background-color: #ffffff;    
+    font-size: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    gap: 15px; /* Tạo khoảng cách giữa các khối */
+    gap: 15px; 
 }
 
-
-.header-center {
-    flex: 1;
-    max-width: 300px;
-    margin: 0 10px;
-    display: flex;
+.logo{
+    font-size:50px ;
+    align-items: center;
 }
 
-
-.header-left {
-    margin-left: 300px;
+.nav-links{
     display: flex;
     align-items: center;
     gap: 40px;
 }
 
-.header-left li {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.nav-links a{
+    color: #5cabff;
 }
 
-.header-left li a,
-.header-left li span {
-  display: block;
-}
 
-.header-left li a{
-    text-decoration: none;
-    color: #007bff;
-    font-size: 40px;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bold;
-
-    
-}
-.header-left ul{
-    display: flex;
-    color: #007bff;
-    align-items: center;
-    gap: 15px;
-    margin: 0;
-    padding: 0; 
-}
-.header-left ul li a{
-   font-size: 20px;
-}
-
-.header-left li span {
-    color: #007bff;
-    font-weight: bold;
-    font-size: 18px;
-}
 
 
 
 .search-box {
-    flex: 1;
     padding: 8px 10px;
-    border: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
     font-size: 16px;
 }
 
-.search-btn {
-    padding: 8px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-}
-
-.search-bar {
-  margin: 20px;
-  text-align: center;
-}
-.search-bar input {
+.search-input {
   padding: 10px;
   width: 60%;
   font-size: 16px;
 }
 
 
-.header-right a {
-    color: black;
-    font-size: 20px;
-    margin-left: 20px;
-    text-decoration: none;
-}
+
 .menu {
     margin-top: -20px;
     width: 250px;
@@ -171,10 +115,9 @@ body {
 }
 
 .footer {
-    background-color: #124195;
-    color: white;
+    background: #ffffff;
+    color: rgb(1, 141, 255);
     padding: 20px;
     text-align: center;
-    margin-top: 200px;
-    border-radius: 0 0 10px 10px;
+    margin-top: 30px;
 }
