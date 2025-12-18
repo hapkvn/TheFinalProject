@@ -12,11 +12,17 @@ const Headers = () => {
   };
 
   return (
-    <div className="header">     
-
-      <div className="logo">
+    <div className="header">
+      <div className="topMenu">
+        <div className="contact">
+          <Link to="/contact">Liên hệ</Link>
+        </div>
+      </div>
+    
+      <div className="main-top">
+        <div className="logo">
           <Link to="/" >
-              LAPTOP VIP
+              LAPTOPVIP
           </Link>
       </div>
 
@@ -32,6 +38,16 @@ const Headers = () => {
           <input type="text" className="search-input" placeholder="Tìm máy tính..." />
           <button onClick={handleSearch}>Tìm</button>
       </div>
+
+      {/*tài khoản */}
+      <div className="account">
+        <Link to="/Login">
+          <i className="fa-solid fa-circle-user" style={{marginRight: '5px'  }}></i>
+          Đăng nhập        
+        </Link>
+      </div>
+    </div>
+      
   </div>
   );
 };
