@@ -12,24 +12,25 @@ body {
 }
 
 
-.header {
-    
+.header {    
     align-items: center;
     justify-content: center;
     background-color: #ffffff;    
     font-size: 20px;  
-    gap: 15px; 
 }
 
 .topMenu{
-    right: inherit;
+    display: flex;
+    justify-content: flex-end;
 }
 .contact{
-    
+    margin:20px 630px 0px 0px;
+
 }
 
 .contact a{
     color: #007bff;
+    font-size: 15px;
 }
 
 .main-top{
@@ -60,26 +61,27 @@ body {
 
 
 .nav-links a{
-    color: #ffffff;
-    background-color: #007bff;
-    border-radius: 2px ;
+    color:black;
+    font-weight: bold;
 }
-
-
-
-
 
 .search-box {
     padding: 8px 10px;
     border-radius: 10px 0 0 10px;
     font-size: 16px;
+    display: flex;
+    justify-content: center;
 }
+.glass{
+    padding: 10px;
+}
+
 
 .search-input {
     padding: 10px;
     width: 60%;
     font-size: 16px;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 10px;
 
 }
 

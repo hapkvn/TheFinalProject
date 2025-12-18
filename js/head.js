@@ -14,9 +14,12 @@ const Headers = () => {
   return (
     <div className="header">
       <div className="topMenu">
-        <div className="contact">
-          <Link to="/contact">Liên hệ</Link>
+        <div className="contact">          
+            <Link to="/contact">Liên hệ</Link>
         </div>
+
+        
+
       </div>
     
       <div className="main-top">
@@ -34,10 +37,19 @@ const Headers = () => {
       </div>
 
       {/* Tìm kiếm */}
-      <div className="search-box">
-          <input type="text" className="search-input" placeholder="Tìm máy tính..." />
-          <button onClick={handleSearch}>Tìm</button>
+      <div className="search-box">        
+            <input type="text" className="search-input" placeholder="Tìm máy tính..." 
+              onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                  handleSearch();
+              }}}/>
+              <div className="glass">
+                <i className="fa-solid fa-magnifying-glass"></i>    
+              </div>
+            
+            
       </div>
+      
 
       {/*tài khoản */}
       <div className="account">
