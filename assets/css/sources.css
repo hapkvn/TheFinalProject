@@ -37,14 +37,98 @@
 
 
 /* BÊN PHẢI: KHỐI LỚN */
+/* --- Khung chính bên phải (Giữ nguyên của bạn) --- */
 .content .right {
     display: flex;
+    flex-direction: column;
     margin-left: 10px;
     width: 320px;
-    background-color: #fff;
+    background-color: #f8f9fa; /* Đổi màu nền nhẹ giống hình mẫu */
     border-radius: 10px;
-    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    height: fit-content; /* Để chiều cao co giãn theo nội dung */
+}
+
+/* --- Tiêu đề: TIN MỚI NHẤT --- */
+.news-header {
+    color: #007bff; /* Màu xanh dương */
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* --- Từng khối tin tức --- */
+.news-item {
+    display: flex;           /* Quan trọng: Xếp ảnh và chữ ngang hàng */
+    align-items: center;     /* Căn giữa dọc */
+    gap: 12px;               /* Khoảng cách giữa ảnh và chữ */
+    background-color: #fff;  /* Nền trắng cho từng tin */
+    padding: 10px;
+    border-radius: 8px;      /* Bo tròn góc tin */
+    margin-bottom: 12px;     /* Khoảng cách giữa các tin */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Đổ bóng nhẹ */
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+/* Hiệu ứng khi di chuột vào tin */
+.news-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+/* Tin đầu tiên (Nổi bật - Có viền xanh nhạt như hình) */
+.news-item.highlight {
+    border: 1px solid #b8daff;
+    background-color: #f0f8ff; /* Màu xanh siêu nhạt */
+}
+
+/* --- Ảnh thumbnail nhỏ --- */
+.news-thumb {
+    width: 80px;            /* Cố định chiều rộng ảnh */
+    height: 50px;           /* Cố định chiều cao ảnh */
+    object-fit: cover;      /* Cắt ảnh vừa khung mà không bị méo */
+    border-radius: 4px;
+}
+
+/* --- Phần chữ bên phải --- */
+.news-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.news-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.4;
+    margin-bottom: 4px;
+    
+    /* Cắt bớt nếu chữ quá dài (tối đa 2 dòng) */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.news-meta {
+    font-size: 11px;
+    color: #888; /* Màu xám nhạt cho ngày tháng */
+}
+
+/* --- Footer: Tất cả tin tức --- */
+.news-footer {
+    margin-top: 10px;
+    color: #007bff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 /* KHỐI DANH SÁCH CON */

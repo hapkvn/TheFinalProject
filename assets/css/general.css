@@ -16,22 +16,11 @@ body {
     align-items: center;
     justify-content: center;
     background-color: #ffffff;    
-    font-size: 20px;  
-}
-
-.topMenu{
+    font-size: 20px;
     display: flex;
-    justify-content: flex-end;
-}
-.contact{
-    margin:20px 630px 0px 0px;
-
+    
 }
 
-.contact a{
-    color: #007bff;
-    font-size: 15px;
-}
 
 .main-top{
     display: flex;
@@ -41,7 +30,64 @@ body {
     padding-top: 10px;
     background-color: #ffffff;    
     font-size: 20px;  
-    gap: 15px; 
+    gap: 40px; 
+}
+.main-top a{
+    text-decoration: none;
+}
+
+.topRight {
+    display: flex;          /* Xếp Liên hệ và Đăng nhập nằm ngang */
+    align-items: center;    /* Căn giữa dọc */
+    gap: 20px;              /* Khoảng cách giữa Liên hệ và Login */
+    margin-left: 20px;      /* Cách thanh tìm kiếm ra một chút */
+}
+
+/* 2. Class Liên hệ: Xóa margin cũ đi */
+.contact {
+    margin: 0; /* Quan trọng: Xóa cái 630px cũ đi */
+}
+
+.contact a {
+    color: #007bff;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* 3. Class Account (Đăng nhập) */
+.account a {
+    color: #333;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+/* --- CHỈNH LẠI THANH TÌM KIẾM CHO ĐẸP (ICON Ở TRONG) --- */
+
+.search-box {
+    position: relative; /* Để icon kính lúp bay vào trong */
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 10px 15px;
+    padding-right: 40px; /* Chừa chỗ cho icon */
+    width: 250px;        /* Độ rộng thanh tìm kiếm */
+    font-size: 16px;
+    border-radius: 20px; /* Bo tròn */
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.glass {
+    position: absolute;  /* Bay lên trên input */
+    right: 15px;         /* Nằm sát phải */
+    color: #555;
+    cursor: pointer;
 }
 
 .logo{
@@ -65,83 +111,69 @@ body {
     font-weight: bold;
 }
 
-.search-box {
-    padding: 8px 10px;
-    border-radius: 10px 0 0 10px;
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-}
-.glass{
-    padding: 10px;
-}
 
 
-.search-input {
-    padding: 10px;
-    width: 60%;
-    font-size: 16px;
-    border-radius: 10px;
-
-}
-
-
+/* Khung bao ngoài cùng */
 .menu {
-    margin-top: -20px;
     width: 250px;
-    background-color: #ffffff;
-    border-radius: 0px 0px 10px 10px;
-    padding: 10px;
+    margin: -67px 35px; 
 }
 
-.menu-header{
+
+.menu-header {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 0px 10px;
-    font-size: 18px;
+    padding: 15px 20px; /* Tăng padding cho cao bằng Header chính nếu cần */
+    font-size: 16px;
     font-weight: bold;
     color: #ffffff;
-    background-color: #124195;
-    box-shadow: none;
-}
-
-.menu li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-
-.menu-danhmuc {
     
+    background-color: #124195;
+    text-transform: uppercase;
+}
+
+/* PHẦN DANH SÁCH (Màu trắng) */
+.menu-danhmuc {
     list-style: none;
     padding: 0;
     margin: 0;
+    background-color: #ffffff;
+    
+    /* Viền bao quanh hộp danh sách */
+    border: 1px solid #ddd;
+    border-top: none; /* Bỏ viền trên để nó liền mạch với header xanh */
+    
+    /* Chỉ bo tròn 2 góc dưới */
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1); /* Đổ bóng nhẹ cho nổi */
 }
 
+/* Từng dòng trong menu */
 .menu-danhmuc li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 15px;
-    font-size: 16px;
+    padding: 12px 20px;
     border-bottom: 1px solid #eeeeee;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
 }
 
+/* Xóa gạch chân dòng cuối cùng cho đẹp */
+.menu-danhmuc li:last-child {
+    border-bottom: none;
+}
+
+/* Hiệu ứng khi di chuột */
 .menu-danhmuc li:hover {
-    background-color: #cfe9fe;
+    background-color: #f0f8ff; /* Màu xanh nhạt khi hover */
+    padding-left: 25px; /* Hiệu ứng đẩy chữ sang phải một chút */
 }
 
-.menu-danhmuc i {
-    color: #007bff;
-    font-size: 18px;
+/* Link bên trong li */
+.menu-danhmuc li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    display: block; /* Để bấm được vào cả vùng trống */
+    width: 100%;
 }
 
 .footer {

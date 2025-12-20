@@ -13,14 +13,6 @@ const Headers = () => {
 
   return (
     <div className="header">
-      <div className="topMenu">
-        <div className="contact">          
-            <Link to="/contact">Liên hệ</Link>
-        </div>
-
-        
-
-      </div>
     
       <div className="main-top">
         <div className="logo">
@@ -37,26 +29,31 @@ const Headers = () => {
       </div>
 
       {/* Tìm kiếm */}
-      <div className="search-box">        
-            <input type="text" className="search-input" placeholder="Tìm máy tính..." 
-              onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                  handleSearch();
-              }}}/>
-              <div className="glass">
-                <i className="fa-solid fa-magnifying-glass"></i>    
-              </div>
-            
-            
+      <div className="search-box">
+        <input type="text" className="search-input" placeholder="Tìm sản phẩm..." 
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }}}/>
+            <div className="glass">
+              <i className="fa-solid fa-magnifying-glass"></i>    
+            </div>
       </div>
       
 
-      {/*tài khoản */}
-      <div className="account">
-        <Link to="/Login">
-          <i className="fa-solid fa-circle-user" style={{marginRight: '5px'  }}></i>
-          Đăng nhập        
-        </Link>
+      {/*top right */}
+      <div className="topRight">
+
+        <div className="contact">          
+            <Link to="/contact">Liên hệ</Link>
+        </div>
+
+        <div className="account">        
+          <Link to="/Login">
+            <i className="fa-solid fa-circle-user" style={{marginRight: '5px'  }}></i>
+              Đăng nhập        
+          </Link>
+        </div>
       </div>
     </div>
       
