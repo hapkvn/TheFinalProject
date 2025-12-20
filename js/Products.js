@@ -1,47 +1,86 @@
 const { Link, useLocation } = ReactRouterDOM;
 
-// Dữ liệu giả lập (Không cần fetch data.json để tránh lỗi)
-const DATA_PRODUCTS = [
-    { id: 1, name: "Asus ROG Strix", price: "25.000.000đ", img: "https://via.placeholder.com/200", cat: "gaming" },
-    { id: 2, name: "Macbook Air M1", price: "18.000.000đ", img: "https://via.placeholder.com/200", cat: "macbook" },
-    { id: 3, name: "Dell Inspiron 15", price: "15.000.000đ", img: "https://via.placeholder.com/200", cat: "office" },
-    { id: 4, name: "Acer Nitro 5", price: "21.000.000đ", img: "https://via.placeholder.com/200", cat: "gaming" },
-];
-
 const Products = () => {
     const search = new URLSearchParams(useLocation().search);
     const keyword = search.get("search") || "";
     const category = search.get("cat") || "";
 
+    // Lấy dữ liệu từ window (file data.js)
+    const products = window.DATA_PRODUCTS || [];
+
     // Logic lọc sản phẩm
-    const filtered = DATA_PRODUCTS.filter(p => {
+    const filtered = products.filter(p => {
         const matchName = p.name.toLowerCase().includes(keyword.toLowerCase());
         const matchCat = category ? p.cat === category : true;
         return matchName && matchCat;
     });
 
     return (
-        <div className="product-page">
-            <h2>
-                {keyword ? `Tìm kiếm: "${keyword}"` : category ? `Danh mục: ${category}` : "Tất cả sản phẩm"}
-            </h2>
+        <div className="product-page-container">
+            {/* 1. Thanh Toolbar (Sắp xếp & So sánh) */}
+            <div className="toolbar">
+                <div className="sort-box">
+                    Sắp xếp: 
+                    <select className="sort-select">
+                        <option value="default">Mặc định</option>
+                        <option value="asc">Giá tăng dần</option>
+                        <option value="desc">Giá giảm dần</option>
+                    </select>
+                </div>
 
-            <div style={{display: 'flex', flexWrap: 'wrap', gap: '15px'}}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ fontWeight: 'bold', marginRight: '10px' }}>So sánh</span>
+                    <label className="switch">
+                        <input type="checkbox" />
+                        <span className="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            {/* Hiển thị tiêu đề tìm kiếm nếu có */}
+            {(keyword || category) && (
+                <h3 style={{ marginBottom: '15px' }}>
+                    {keyword ? `Kết quả tìm kiếm: "${keyword}"` : `Danh mục: ${category}`}
+                </h3>
+            )}
+
+            {/* 2. Lưới sản phẩm (Grid) */}
+            <div className="product-grid">
                 {filtered.length > 0 ? filtered.map(p => (
-                    <div key={p.id} style={{width: '30%', border: '1px solid #ddd', padding: '10px', textAlign: 'center'}}>
-                        <img src={p.img} style={{width: '100%'}} alt={p.name} />
-                        <h4>{p.name}</h4>
-                        <p style={{color: 'red', fontWeight: 'bold'}}>{p.price}</p>
-                        <Link to={`/detail/${p.id}`} className="btn btn-primary" style={{display:'inline-block', padding: '5px 10px', background: 'blue', color: 'white', textDecoration: 'none'}}>
-                            Xem chi tiết
-                        </Link>
+                    <div className="product-card" key={p.id}>
+                        {/* Badge (Ruy băng cam góc trái) */}
+                        <div className="top-badge">{p.badge}</div>
+
+                        {/* Ảnh sản phẩm */}
+                        <div className="img-container">
+                            <img src={p.img} alt={p.name} />
+                        </div>
+
+                        {/* Tag trạng thái */}
+                        <div className="status-tag">{p.status}</div>
+
+                        {/* Tên sản phẩm */}
+                        <h3 className="prod-title">
+                            <Link to={`/detail/${p.id}`}>{p.name}</Link>
+                        </h3>
+
+                        {/* Giá tiền */}
+                        <div className="prod-price">{p.price} ₫</div>
+
+                        {/* Footer của Card (Phiên bản & Yêu thích) */}
+                        <div className="card-footer">
+                            <span>phiên bản</span>
+                            <span className="wishlist">Yêu thích</span>
+                        </div>
                     </div>
-                )) : <p>Không tìm thấy sản phẩm nào.</p>}
+                )) : (
+                    <p style={{ gridColumn: '1 / -1', textAlign: 'center' }}>
+                        Không tìm thấy sản phẩm nào.
+                    </p>
+                )}
             </div>
         </div>
     );
 };
 
 window.Products = Products;
-// Xuất data ra window để Detail.js dùng chung
-window.DATA_PRODUCTS = DATA_PRODUCTS;

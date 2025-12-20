@@ -1,35 +1,77 @@
 const { useParams, Link } = ReactRouterDOM;
 
 const Detail = () => {
-    const { id } = useParams();
+    const { id } = useParams(); // Lấy ID từ URL
     
-    // Lấy data từ biến toàn cục đã khai báo ở Products.js (hoặc dùng lại mảng y hệt)
-    // Để an toàn, tôi khai báo lại mảng data y hệt ở đây
-    const DATA = [
-        { id: 1, name: "Asus ROG Strix", price: "25.000.000đ", img: "https://via.placeholder.com/300", desc: "Laptop chơi game cấu hình khủng." },
-        { id: 2, name: "Macbook Air M1", price: "18.000.000đ", img: "https://via.placeholder.com/300", desc: "Mỏng nhẹ, sang trọng, pin trâu." },
-        { id: 3, name: "Dell Inspiron 15", price: "15.000.000đ", img: "https://via.placeholder.com/300", desc: "Bền bỉ cho văn phòng." },
-        { id: 4, name: "Acer Nitro 5", price: "21.000.000đ", img: "https://via.placeholder.com/300", desc: "Gaming giá rẻ quốc dân." },
-    ];
+    // Tìm sản phẩm trong dữ liệu
+    const product = (window.DATA_PRODUCTS || []).find(p => p.id == id);
 
-    const product = DATA.find(p => p.id == id);
+    if (!product) return <div style={{padding: 20}}>Không tìm thấy sản phẩm!</div>;
 
-    if (!product) return <h3>Sản phẩm không tồn tại!</h3>;
+    // Danh sách các nhãn hiển thị (Mapping key sang tiếng Việt)
+    const specLabels = {
+        cpu: "CPU (Bộ vi xử lý)",
+        ram: "Ram (Bộ nhớ trong)",
+        storage: "Storage (Ổ cứng)",
+        display: "Màn hình",
+        gpu: "Card đồ họa",
+        os: "Hệ điều hành",
+        keyboard: "Bàn phím",
+        fingerprint: "Bảo mật vân tay",
+        battery: "Pin & Sạc",
+        camera: "Webcam",
+        audio: "Âm thanh",
+        ports: "Cổng kết nối",
+        wireless: "Kết nối không dây",
+        size: "Kích thước",
+        weight: "Trọng lượng",
+        color: "Màu sắc",
+        material: "Chất liệu",
+        condition: "Tình trạng",
+        year: "Năm sản xuất",
+        warranty: "Bảo hành",
+        brand: "Hãng sản xuất",
+        origin: "Xuất xứ"
+    };
 
     return (
-        <div className="detail-box">
-            <h1>{product.name}</h1>
-            <div style={{display: 'flex', gap: '30px', marginTop: '20px'}}>
-                <img src={product.img} alt={product.name} style={{border: '1px solid #ddd'}} />
-                <div>
-                    <h2 style={{color: 'red'}}>{product.price}</h2>
-                    <p>{product.desc}</p>
-                    <button style={{padding: '10px 20px', background: 'red', color: 'white', border: 'none', cursor: 'pointer'}}>
-                        ĐẶT MUA NGAY
-                    </button>
-                    <br/><br/>
-                    <Link to="/products">← Quay lại danh sách</Link>
+        <div className="detail-container">
+            {/* Nút quay lại */}
+            <Link to="/" className="back-btn">← Quay lại danh sách</Link>
+
+            <div className="detail-header">
+                <div className="detail-img">
+                    <img src={product.img} alt={product.name} />
                 </div>
+                <div className="detail-info">
+                    <h1>{product.name}</h1>
+                    <p className="detail-price">{product.price} ₫</p>
+                    <div className="detail-status">{product.status}</div>
+                    <p>{product.badge}</p>
+                    <button className="buy-btn">MUA NGAY</button>
+                </div>
+            </div>
+
+            {/* Bảng thông số kỹ thuật */}
+            <div className="specs-section">
+                <h2>Thông số kỹ thuật</h2>
+                {product.specs && Object.keys(product.specs).length > 0 ? (
+                    <table className="specs-table">
+                        <tbody>
+                            {/* Duyệt qua từng dòng trong specs để hiển thị */}
+                            {Object.keys(specLabels).map(key => (
+                                product.specs[key] ? (
+                                    <tr key={key}>
+                                        <td className="spec-label">{specLabels[key]}</td>
+                                        <td className="spec-value">{product.specs[key]}</td>
+                                    </tr>
+                                ) : null
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p>Chưa có thông số chi tiết cho sản phẩm này.</p>
+                )}
             </div>
         </div>
     );

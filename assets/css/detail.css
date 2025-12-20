@@ -1,0 +1,71 @@
+/* --- Trang Chi tiết --- */
+.detail-container {
+    width: 1200px;
+    margin: 20px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.detail-header {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.detail-img img {
+    max-width: 400px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+.detail-info h1 { font-size: 24px; margin-bottom: 10px; }
+.detail-price { color: #d70018; font-size: 28px; font-weight: bold; margin: 15px 0; }
+.buy-btn {
+    background: #d70018; color: white; border: none;
+    padding: 10px 40px; font-size: 18px; font-weight: bold;
+    border-radius: 5px; cursor: pointer; margin-top: 20px;
+}
+
+/* --- Bảng thông số kỹ thuật --- */
+.specs-section h2 { margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.specs-table td {
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    vertical-align: top;
+}
+
+.spec-label {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    width: 200px; /* Chiều rộng cột tiêu đề */
+    color: #333;
+}
+
+.spec-value {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Tạo màu dòng xen kẽ cho dễ nhìn */
+.specs-table tr:nth-child(even) .spec-value {
+    background-color: #fcfcfc;
+}
+.specs-table tr:hover td {
+    background-color: #f1f1f1;
+}

@@ -1,9 +1,9 @@
 /* --- Khung bao ngoài của trang sản phẩm --- */
 .product-page-container {
-    width: 1200px; /* Độ rộng chuẩn */
+    width: 1000px; /* Độ rộng chuẩn */
     margin: 0 auto;
     background-color: #f3f4f6; /* Màu nền xám nhẹ của cả trang */
-    padding: 20px;
+    margin-left: -40px;
     border-radius: 8px;
 }
 
@@ -29,7 +29,7 @@
     cursor: pointer;
 }
 
-/* Nút gạt So sánh (Switch toggle) */
+
 .switch {
   position: relative;
   display: inline-block;

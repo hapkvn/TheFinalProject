@@ -4,11 +4,12 @@ const Menu = () => {
       {/* 1. Áp dụng class menu-header vào đây */}
       <div className="menu-header">
         <i className="fa fa-bars"></i> 
-        <span>DANH MỤC SẢN PHẨM</span>
+        <span>DANH MỤC</span>
       </div>
       
       {/* 2. Áp dụng class menu-danhmuc vào thẻ ul */}
       <ul className="menu-danhmuc">
+        <li><Link to="/products">Máy tính xách tay</Link></li>
         <li><Link to="/products?cat=gaming">Laptop Gaming</Link></li>
         <li><Link to="/products?cat=macbook">Macbook Apple</Link></li>
         <li><Link to="/products?cat=office">Laptop cao cấp</Link></li>
