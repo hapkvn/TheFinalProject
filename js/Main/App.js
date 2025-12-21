@@ -8,7 +8,7 @@ const App = () => {
 
             {/* Container chính */}
             <div className="main-container" style={{display: 'flex', maxWidth: '1200px', margin: '20px auto', gap: '20px'}}>
-                
+
                 {/* MENU BÊN TRÁI (Chiếm 25%) */}
                 <div style={{flex: '0 0 250px'}}>
                     <Menu />
@@ -21,6 +21,7 @@ const App = () => {
                         <Route exact path="/products" component={Products} />
                         {/* Route cho chi tiết sản phẩm */}
                         <Route path="/detail/:id" component={Detail} />
+                        <Route path="/login" component={Login} />
                     </Switch>
                 </div>
 

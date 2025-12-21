@@ -1,0 +1,103 @@
+/* --- Trang Đăng Nhập --- */
+.login-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Chiều cao tối thiểu để căn giữa dọc */
+    background-color: #f3f4f6;
+}
+
+.login-form-container {
+    background: white;
+    width: 400px;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.login-form-container h2 {
+    text-align: center;
+    color: #d70018; /* Màu đỏ chủ đạo */
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.login-desc {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #d70018;
+}
+
+.error-msg {
+    color: red;
+    font-size: 13px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.forgot-pass {
+    color: #007bff;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.btn-login-submit {
+    width: 100%;
+    background-color: #d70018;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-login-submit:hover {
+    background-color: #b30014;
+}
+
+.login-footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.login-footer a {
+    color: #d70018;
+    font-weight: bold;
+    text-decoration: none;
+}
