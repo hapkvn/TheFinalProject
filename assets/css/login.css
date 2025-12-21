@@ -17,7 +17,7 @@
 
 .login-form-container h2 {
     text-align: center;
-    color: #d70018; /* Màu đỏ chủ đạo */
+    color: #007bff; /* Màu đỏ chủ đạo */
     margin-bottom: 10px;
     font-size: 24px;
 }
@@ -51,11 +51,11 @@
 }
 
 .form-group input:focus {
-    border-color: #d70018;
+    border-color: #007bff;
 }
 
 .error-msg {
-    color: red;
+    color: 007bff;
     font-size: 13px;
     margin-bottom: 10px;
     text-align: center;
@@ -75,7 +75,7 @@
 
 .btn-login-submit {
     width: 100%;
-    background-color: #d70018;
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 12px;
@@ -87,7 +87,7 @@
 }
 
 .btn-login-submit:hover {
-    background-color: #b30014;
+    background-color: #5ea8f7;
 }
 
 .login-footer {
@@ -97,7 +97,7 @@
 }
 
 .login-footer a {
-    color: #d70018;
+    color: #007bff;
     font-weight: bold;
     text-decoration: none;
 }
