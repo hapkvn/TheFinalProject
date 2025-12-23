@@ -1,42 +1,88 @@
-/* --- Trang Chi tiết --- */
-.detail-container {
-    width: 1200px;
+/* Container chung */
+.detail-page-wrapper {
+    max-width: 1200px;
     margin: 20px auto;
-    background: white;
-    padding: 30px;
+    background: #fff;
+    padding: 20px;
     border-radius: 8px;
+        margin-left: -40px;
+
 }
 
-.back-btn {
-    display: inline-block;
-    margin-bottom: 20px;
-    text-decoration: none;
-    color: #007bff;
+/* Tên sản phẩm trên cùng */
+/* --- SỬA LẠI TRONG assets/css/detail.css --- */
+
+.product-name-top {
+    font-size: 24px;
     font-weight: bold;
+    color: #333;
+    margin: 10px 0 20px 0;
+    
+    /* QUAN TRỌNG: Ép buộc xuống dòng bằng !important */
+    display: block !important;
+    width: 100% !important;
+    white-space: normal !important;   /* Cho phép xuống dòng */
+    overflow: visible !important;     /* Hiển thị hết nội dung */
+    text-overflow: clip !important;   /* Bỏ dấu ... */
+    height: auto !important;          /* Chiều cao tự động dãn */
+    line-height: 1.4 !important;      /* Khoảng cách dòng */
+    
+    /* Xử lý trường hợp chữ quá dài không có dấu cách */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
-.detail-header {
+
+/* Layout 2 cột */
+.detail-main-content {
     display: flex;
-    gap: 40px;
-    margin-bottom: 40px;
+    gap: 30px;
 }
 
-.detail-img img {
-    max-width: 400px;
-    border: 1px solid #eee;
+/* Cột Trái */
+.detail-left {
+    flex: 0 0 45%; /* Rộng 45% */
+    max-width: 45%;
+}
+
+.main-image-box img {
+    width: 100%;
     border-radius: 8px;
+    border: 1px solid #eee;
 }
 
-.detail-info h1 { font-size: 24px; margin-bottom: 10px; }
-.detail-price { color: #d70018; font-size: 28px; font-weight: bold; margin: 15px 0; }
-.buy-btn {
-    background: #d70018; color: white; border: none;
-    padding: 10px 40px; font-size: 18px; font-weight: bold;
-    border-radius: 5px; cursor: pointer; margin-top: 20px;
+.thumbnail-list {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+}
+.thumb-item img {
+    width: 60px; height: 60px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-/* --- Bảng thông số kỹ thuật --- */
-.specs-section h2 { margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+/* --- CSS CHO BẢNG THÔNG SỐ (STYLE MỚI) --- */
+.specs-section {
+    margin-top: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fcfcfc;
+}
+
+.specs-section h2 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #d70018;
+    text-transform: uppercase;
+    border-bottom: 2px solid #d70018;
+    display: inline-block;
+    padding-bottom: 5px;
+}
 
 .specs-table {
     width: 100%;
@@ -45,27 +91,94 @@
 }
 
 .specs-table td {
-    padding: 10px 15px;
-    border: 1px solid #e0e0e0;
-    vertical-align: top;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
 }
 
+/* Cột nhãn (Trái) - Màu xám nhạt */
 .spec-label {
-    background-color: #f9f9f9;
-    font-weight: bold;
-    width: 200px; /* Chiều rộng cột tiêu đề */
+    width: 35%;
+    background-color: #f2f2f2;
+    font-weight: 600;
     color: #333;
 }
 
+/* Cột giá trị (Phải) */
 .spec-value {
     color: #555;
-    line-height: 1.5;
 }
 
-/* Tạo màu dòng xen kẽ cho dễ nhìn */
-.specs-table tr:nth-child(even) .spec-value {
-    background-color: #fcfcfc;
+/* Bỏ viền dòng cuối */
+.specs-table tr:last-child td {
+    border-bottom: none;
 }
-.specs-table tr:hover td {
-    background-color: #f1f1f1;
+
+/* Cột Phải */
+.detail-right {
+    flex: 1;
+}
+
+.current-price {
+    font-size: 28px;
+    font-weight: bold;
+    color: #d70018;
+    display: block;
+}
+.vat-note { font-size: 13px; color: #666; }
+
+/* Khung khuyến mãi */
+.promo-container { margin: 20px 0; }
+.promo-box { border: 1px solid #d70018; border-radius: 5px; overflow: hidden; }
+.box-header {
+    background: #d70018; color: #fff;
+    padding: 8px; font-weight: bold;
+    text-align: center;
+}
+.box-content { padding: 15px; }
+.box-content ul { list-style: none; padding: 0; margin: 0; }
+.box-content li { margin-bottom: 8px; display: flex; gap: 8px; }
+.box-content i { color: #d70018; margin-top: 4px; }
+
+/* Nút bấm */
+.btn-buy-now {
+    width: 100%;
+    background: #d70018;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn-buy-now strong { font-size: 18px; }
+
+.btn-group-row { display: flex; gap: 10px; }
+.btn-installment {
+    flex: 1;
+    background: #2f80ed;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.consult-form { display: flex; margin-top: 20px; gap: 10px;}
+.consult-form input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+.consult-form button { background: #333; color: white; border: none; padding: 0 20px; border-radius: 4px; cursor: pointer;}
+
+.warranty-badges {
+    display: flex; 
+    gap: 10px;           
+    margin-bottom: 20px;
+    color: #007bff;
+    font-size: 14px;
+    font-weight: 500;
+    align-items: flex-start;
 }

@@ -32,7 +32,8 @@ const MainLayout = () => {
                         <Route exact path="/products" component={Products} />
                         <Route path="/detail/:id" component={Detail} />
                         <Route path="/Login" component={Login} />
-                    </Switch>
+                        <Route path="/register" component={Register} />
+                                            </Switch>
                 </div>
 
             </div>

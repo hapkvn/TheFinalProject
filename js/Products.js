@@ -51,10 +51,13 @@ const Products = () => {
                         {/* Badge (Ruy băng cam góc trái) */}
                         <div className="top-badge">{p.badge}</div>
 
-                        {/* Ảnh sản phẩm */}
-                        <div className="img-container">
+                    <div className="img-container">
+                        {/* --- THÊM LINK VÀO ĐÂY --- */}
+                        <Link to={`/detail/${p.id}`}>
                             <img src={p.img} alt={p.name} />
-                        </div>
+                        </Link>
+                        {/* ------------------------- */}
+                    </div>  
 
                         {/* Tag trạng thái */}
                         <div className="status-tag">{p.status}</div>
