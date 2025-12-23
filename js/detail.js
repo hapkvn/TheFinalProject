@@ -2,54 +2,46 @@ const { useParams, Link } = ReactRouterDOM;
 
 const Detail = () => {
     const { id } = useParams();
-    
-    // Tìm sản phẩm
     const product = (window.DATA_PRODUCTS || []).find(p => p.id == id);
 
     if (!product) return <div style={{padding: 20}}>Không tìm thấy sản phẩm!</div>;
 
-    // Mapping key sang tiếng Việt (Code của bạn)
+    // Mapping thông số kỹ thuật
     const specLabels = {
-        cpu: "CPU",
-        ram: "RAM",
-        storage: "Ổ cứng",
-        display: "Màn hình",
-        gpu: "VGA",
-        os: "Hệ điều hành",
-        keyboard: "Bàn phím",
-        weight: "Trọng lượng",
-        battery: "Pin",
-        color: "Màu sắc",
-        material: "Chất liệu",
-        origin: "Xuất xứ"
+        cpu: "CPU", ram: "RAM", storage: "Ổ cứng", display: "Màn hình",
+        gpu: "VGA", os: "Hệ điều hành", weight: "Trọng lượng", battery: "Pin"
     };
+
+    // Dữ liệu giả lập cho phần Mua theo combo (Giống ảnh bạn gửi)
+    const comboList = [
+        { id: 1, name: "Chuột Không Dây Logitech Signature M650", price: "615.000 ₫", img: "https://via.placeholder.com/50" },
+        { id: 2, name: "Phích cắm chuyển đổi 3 chấu sang 2 chấu tròn", price: "20.000 ₫", img: "https://via.placeholder.com/50" },
+        { id: 3, name: "Giá Đỡ Laptop Đa Năng Z34", price: "130.000 ₫", img: "https://via.placeholder.com/50" },
+        { id: 4, name: "Tấm Lót Bàn Phím Laptop Đa Năng Siêu Mỏng", price: "35.000 ₫", img: "https://via.placeholder.com/50" },
+    ];
 
     return (
         <div className="detail-page-wrapper">
-            {/* Breadcrumb */}
-            <div className="breadcrumb">
-                <Link to="/">Trang chủ</Link> / <Link to="/products">Laptop</Link> / <span>{product.name}</span>
-            </div>
+            
 
-            {/* 1. TÊN SẢN PHẨM (NẰM TRÊN CÙNG) */}
+            {/* Tên sản phẩm trên cùng */}
             <h1 className="product-name-top">{product.name}</h1>
 
             <div className="detail-main-content">
                 
-                {/* --- CỘT TRÁI: ẢNH & THÔNG SỐ KỸ THUẬT --- */}
+                {/* --- CỘT TRÁI: ẢNH & THÔNG SỐ --- */}
                 <div className="detail-left">
                     <div className="main-image-box">
-                        <img src={product.img} alt={product.name} />
+                        <img src={product.img || "https://via.placeholder.com/500x500"} alt={product.name} />
                     </div>
                     
-                    {/* Thumbnail ảnh nhỏ */}
                     <div className="thumbnail-list">
-                        <div className="thumb-item active"><img src={product.img} /></div>
-                        <div className="thumb-item"><img src={product.img} /></div>
-                        <div className="thumb-item"><img src={product.img} /></div>
+                        <div className="thumb-item active"><img src={product.img || "https://via.placeholder.com/60"} /></div>
+                        <div className="thumb-item"><img src={product.img || "https://via.placeholder.com/60"} /></div>
+                        <div className="thumb-item"><img src={product.img || "https://via.placeholder.com/60"} /></div>
                     </div>
 
-                    {/* BẢNG THÔNG SỐ KỸ THUẬT (Code của bạn tích hợp vào đây) */}
+                    {/* Bảng thông số kỹ thuật */}
                     <div className="specs-section">
                         <h2>Thông số kỹ thuật</h2>
                         {product.specs ? (
@@ -69,11 +61,11 @@ const Detail = () => {
                     </div>
                 </div>
 
-                {/* --- CỘT PHẢI: GIÁ & MUA HÀNG --- */}
+                {/* --- CỘT PHẢI: GIÁ, KHUYẾN MÃI & COMBO --- */}
                 <div className="detail-right">
                     
                     <div className="price-section">
-                        <span className="current-price">{product.price}</span>
+                        <span className="current-price">{product.price} ₫</span>
                         <span className="vat-note">(Đã bao gồm VAT)</span>
                     </div>
 
@@ -85,17 +77,11 @@ const Detail = () => {
                                 <ul>
                                     <li><i className="fa fa-gift"></i> Tặng Balo Laptop cao cấp.</li>
                                     <li><i className="fa fa-gift"></i> Tặng Chuột không dây chính hãng.</li>
-                                    <li><i className="fa fa-gift"></i> Voucher giảm giá 200k cho lần mua sau.</li>
+                                    <li><i className="fa fa-gift"></i> Voucher giảm giá 200k.</li>
                                     <li><i className="fa fa-check-circle"></i> Hỗ trợ cài đặt phần mềm trọn đời.</li>
                                 </ul>
                             </div>
                         </div>
-                    </div>
-
-                    {/* Bảo hành */}
-                    <div className="warranty-badges">
-                        <span><i className="fa fa-shield"></i> Bảo hành 12 tháng</span>
-                        <span><i className="fa fa-refresh"></i> 1 đổi 1 trong 15 ngày</span>
                     </div>
 
                     {/* Nút Mua */}
@@ -116,11 +102,50 @@ const Detail = () => {
                         </div>
                     </div>
 
-                    {/* Form tư vấn */}
                     <div className="consult-form">
                         <input type="text" placeholder="Nhập số điện thoại để được tư vấn..." />
                         <button>GỬI</button>
                     </div>
+
+                    {/* --- PHẦN MỚI THÊM: MUA THEO COMBO --- */}
+                    <div className="combo-wrapper">
+                        <h3 className="combo-title">Mua theo combo</h3>
+                        
+                        <div className="combo-list">
+                            {comboList.map(item => (
+                                <div className="combo-item" key={item.id}>
+                                    <input type="checkbox" defaultChecked className="combo-checkbox" />
+                                    <div className="combo-img">
+                                        <img src={item.img} alt={item.name} />
+                                    </div>
+                                    <div className="combo-info">
+                                        <div className="combo-name">{item.name}</div>
+                                        <div className="combo-row-bottom">
+                                            <span className="combo-price">{item.price}</span>
+                                            <a href="#" className="link-change">Chọn sản phẩm khác &gt;</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                            
+                            {/* Nút thêm sản phẩm khác (dấu +) */}
+                            <div className="combo-add-more">
+                                <div className="icon-plus">+</div>
+                                <span>Thêm sản phẩm</span>
+                            </div>
+                        </div>
+
+                        {/* Footer tổng tiền combo */}
+                        <div className="combo-footer">
+                            <button className="btn-buy-combo">MUA THÊM 4 SẢN PHẨM</button>
+                            <div className="combo-total-info">
+                                <div className="saving">Tiết kiệm: <span>114.000₫</span></div>
+                                <div className="total">Tổng tiền: <span>20.870.000₫</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    {/* --- KẾT THÚC PHẦN COMBO --- */}
+
                 </div>
             </div>
         </div>

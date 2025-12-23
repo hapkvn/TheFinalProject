@@ -17,6 +17,7 @@ const Products = () => {
 
     return (
         <div className="product-page-container">
+
             {/* 1. Thanh Toolbar (Sắp xếp & So sánh) */}
             <div className="toolbar">
                 <div className="sort-box">

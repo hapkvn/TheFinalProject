@@ -1,7 +1,7 @@
 const DATA_PRODUCTS = [
     { 
         id: 1, 
-        name: "Thinkpad E14 Gen 7 21SX002QVA Ultra 5 225U...", 
+        name: "Thinkpad E14 Gen 7 21SX002QVA Ultra 5 225U", 
         price: "20.490.000", 
         img: "img/892x556_1762486949.webp", 
         cat: "office",

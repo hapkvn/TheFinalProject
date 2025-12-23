@@ -13,6 +13,7 @@ const Menu = () => {
         <li><Link to="/products?cat=gaming">Laptop Gaming</Link></li>
         <li><Link to="/products?cat=macbook">Macbook Apple</Link></li>
         <li><Link to="/products?cat=office">Laptop cao cấp</Link></li>
+        <li><Link to="/products?cat=office">Laptop mỏng nhẹ</Link></li>
         <li><Link to="/products?cat=office">Laptop live new</Link></li>
         <li><Link to="/products?cat=office">Phụ kiện</Link></li>
         <li><Link to="/products?cat=office">RAM, SSD</Link></li>
