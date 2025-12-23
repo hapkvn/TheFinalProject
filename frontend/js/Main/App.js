@@ -1,51 +1,49 @@
 const { HashRouter, Route, Switch, useLocation } = ReactRouterDOM;
 
-// 1. Tạo một component con để xử lý logic hiển thị
+// 1. Component Layout để xử lý việc ẩn/hiện Menu
 const MainLayout = () => {
-    const location = useLocation(); // Hook này giúp lấy đường dẫn hiện tại
-    const currentPath = location.pathname;
+    const location = useLocation();
+    const currentPath = location.pathname.toLowerCase();
     
-    // Kiểm tra: Nếu đường dẫn là "/login" thì biến này là true
-    const noMenuPaths = ['/Login', '/register', '/cart','/contact'];
+    // Các trang không hiện Menu
+    const noMenuPaths = ['/login', '/register', '/cart', '/contact'];
     const showMenu = !noMenuPaths.includes(currentPath);
 
     return (
         <div className="app-root">
+            <React.Fragment>
+                <window.Headers />
 
-        
-        <React.Fragment>
-            {/* Header luôn hiển thị (Giữ nguyên) */}
-            <Headers />
+                <div className="main-container">
+                    {/* Menu bên trái */}
+                    {showMenu && (
+                        <div style={{flex: '0 0 250px'}}>
+                            <window.Menu />
+                        </div>
+                    )}
 
-            {/* Container chính (Giữ nguyên) */}
-            <div className="main-container">
-
-                
-                {showMenu &&  (
-                    <div style={{flex: '0 0 250px'}}>
-                        <Menu />
+                    {/* Nội dung chính */}
+                    <div style={{flex: 1}}>
+                        {/* CÚ PHÁP V5: Dùng Switch */}
+                        <Switch>
+                            <Route exact path="/" component={window.Home} />
+                            <Route path="/products" component={window.Products} />
+                            <Route path="/detail/:id" component={window.Detail} />
+                            
+                            {/* Login & Register */}
+                            <Route path="/login" component={window.Login} />
+                            <Route path="/register" component={window.Register} />
+                        </Switch>
                     </div>
-                )}
-                <div style={{flex: 1}}>
-                    <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/products" component={Products} />
-                        <Route path="/detail/:id" component={Detail} />
-                        <Route path="/Login" component={Login} />
-                        <Route path="/register" component={Register} />
-                                            </Switch>
                 </div>
 
-            </div>
-
-            {/* Footer luôn hiển thị (Giữ nguyên) */}
-            <Footer />
-        </React.Fragment>
+                <window.Footer />
+            </React.Fragment>
         </div>
     );
 };
 
-// 2. Component App gốc chỉ còn nhiệm vụ bọc HashRouter
+// 2. App gốc bọc Router
 const App = () => {
     return (
         <HashRouter>

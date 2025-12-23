@@ -1,28 +1,48 @@
 const { useState } = React;
+// V5: Lấy useHistory
 const { useHistory, Link } = ReactRouterDOM;
 
 const Login = () => {
-    const history = useHistory();
+    const history = useHistory(); // V5: Khởi tạo history
+    
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const handleLogin = (e) => {
-        e.preventDefault(); // Ngăn việc tải lại trang
-        
-        // --- LOGIC KIỂM TRA MẬT KHẨU GIẢ LẬP ---
-        if (username === "admin" && password === "123456") {
-            // 1. Lưu trạng thái đã đăng nhập vào LocalStorage
-            localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("user", username);
-            
-            // 2. Chuyển hướng về trang chủ
-            alert("Đăng nhập thành công!");
-            history.push("/"); 
-            
-            // (Mẹo: Nếu muốn reload để Header cập nhật tên, dùng window.location.href = "/")
-        } else {
-            setError("Sai tên đăng nhập hoặc mật khẩu!");
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        const dataToSend = {
+            username: username,
+            password: password
+        };
+
+        try {
+            // Gọi API sang Java (cổng 8080)
+            const response = await fetch("http://localhost:8088/api/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dataToSend),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Đăng nhập thành công
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("user", JSON.stringify(data));
+
+                // V5: Dùng history.push để chuyển trang
+                history.push("/"); 
+                // Hoặc window.location.href = "/" nếu muốn reload lại Header
+            } else {
+                setError(data.message || "Đăng nhập thất bại!");
+            }
+
+        } catch (err) {
+            console.error("Lỗi:", err);
+            setError("Không thể kết nối Server!");
         }
     };
 

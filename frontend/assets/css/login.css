@@ -1,10 +1,10 @@
-/* --- Trang Đăng Nhập --- */
+
 .login-page-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh; /* Chiều cao tối thiểu để căn giữa dọc */
-    background-color: #f3f4f6;
+    min-height: 80vh; /* Căn giữa màn hình */
+    background-color: #f3f4f6; /* Màu nền xám nhẹ */
 }
 
 .login-form-container {
@@ -12,14 +12,17 @@
     width: 400px;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    /* Đổ bóng nhẹ giúp khung nổi bật hơn */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .login-form-container h2 {
     text-align: center;
-    color: #007bff; /* Màu đỏ chủ đạo */
+    color: #124195; /* Dùng màu xanh đậm của thương hiệu thay vì xanh nhạt */
     margin-bottom: 10px;
     font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
 }
 
 .login-desc {
@@ -43,22 +46,31 @@
 
 .form-group input {
     width: 100%;
-    padding: 10px;
+    padding: 12px; /* Tăng padding chút cho dễ nhìn */
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
     outline: none;
+    /* QUAN TRỌNG: Giúp input không bị tràn ra ngoài khung padding */
+    box-sizing: border-box;
+    transition: border-color 0.3s;
 }
 
 .form-group input:focus {
     border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
 }
 
+/* --- SỬA LỖI Ở ĐÂY --- */
 .error-msg {
-    color: 007bff;
+    color: #d70018; /* Đổi sang màu ĐỎ để cảnh báo lỗi (Code cũ của bạn thiếu dấu # và đang là màu xanh) */
     font-size: 13px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     text-align: center;
+    background-color: #fff0f0;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ffcccc;
 }
 
 .form-actions {
@@ -72,10 +84,13 @@
     font-size: 13px;
     text-decoration: none;
 }
+.forgot-pass:hover {
+    text-decoration: underline;
+}
 
 .btn-login-submit {
     width: 100%;
-    background-color: #007bff;
+    background-color: #d70018; /* Nên dùng màu ĐỎ chủ đạo của Web bán hàng để kích thích hành động */
     color: white;
     border: none;
     padding: 12px;
@@ -84,20 +99,26 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s;
+    text-transform: uppercase;
 }
 
 .btn-login-submit:hover {
-    background-color: #5ea8f7;
+    background-color: #b00014; /* Màu đỏ đậm hơn khi hover */
 }
 
 .login-footer {
     margin-top: 20px;
     text-align: center;
     font-size: 14px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
 }
 
 .login-footer a {
     color: #007bff;
     font-weight: bold;
     text-decoration: none;
+}
+.login-footer a:hover {
+    text-decoration: underline;
 }
