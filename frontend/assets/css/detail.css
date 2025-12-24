@@ -1,34 +1,22 @@
-/* Container chung */
+/* --- BỐ CỤC CHUNG --- */
 .detail-page-wrapper {
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 20px auto; /* Căn giữa chuẩn */
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    margin-left: -40px; /* Lưu ý: margin âm này có thể gây lệch layout trên màn hình nhỏ, hãy kiểm tra lại nếu cần */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-/* Tên sản phẩm trên cùng */
+/* Tên sản phẩm */
 .product-name-top {
     font-size: 24px;
     font-weight: bold;
     color: #333;
-    margin: 10px 0 20px 0;
-    
-    /* QUAN TRỌNG: Ép buộc xuống dòng bằng !important */
-    display: block !important;
-    width: 100% !important;
-    white-space: normal !important;   /* Cho phép xuống dòng */
-    overflow: visible !important;     /* Hiển thị hết nội dung */
-    text-overflow: clip !important;   /* Bỏ dấu ... */
-    height: auto !important;          /* Chiều cao tự động dãn */
-    line-height: 1.4 !important;      /* Khoảng cách dòng */
-    
-    /* Xử lý trường hợp chữ quá dài không có dấu cách */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    margin: 0 0 20px 0;
+    line-height: 1.4;
+    word-wrap: break-word; /* Xuống dòng nếu chữ quá dài */
 }
-
 
 /* Layout 2 cột */
 .detail-main-content {
@@ -36,9 +24,9 @@
     gap: 30px;
 }
 
-/* Cột Trái */
+/* --- CỘT TRÁI --- */
 .detail-left {
-    flex: 0 0 45%; /* Rộng 45% */
+    flex: 0 0 45%;
     max-width: 45%;
 }
 
@@ -59,9 +47,10 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     cursor: pointer;
+    object-fit: cover;
 }
 
-/* --- CSS CHO BẢNG THÔNG SỐ (STYLE MỚI) --- */
+/* Bảng thông số kỹ thuật */
 .specs-section {
     margin-top: 30px;
     border: 1px solid #e0e0e0;
@@ -69,51 +58,36 @@
     padding: 15px;
     background-color: #fcfcfc;
 }
-
 .specs-section h2 {
     font-size: 18px;
-    margin-top: 0;
-    margin-bottom: 15px;
+    margin: 0 0 15px 0;
     color: #d70018;
     text-transform: uppercase;
     border-bottom: 2px solid #d70018;
     display: inline-block;
     padding-bottom: 5px;
 }
-
 .specs-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
 }
-
 .specs-table td {
     padding: 10px;
     border-bottom: 1px solid #e0e0e0;
 }
+.specs-table tr:last-child td { border-bottom: none; }
 
-/* Cột nhãn (Trái) - Màu xám nhạt */
 .spec-label {
     width: 35%;
     background-color: #f2f2f2;
     font-weight: 600;
     color: #333;
 }
+.spec-value { color: #555; }
 
-/* Cột giá trị (Phải) */
-.spec-value {
-    color: #555;
-}
-
-/* Bỏ viền dòng cuối */
-.specs-table tr:last-child td {
-    border-bottom: none;
-}
-
-/* Cột Phải */
-.detail-right {
-    flex: 1;
-}
+/* --- CỘT PHẢI --- */
+.detail-right { flex: 1; }
 
 .current-price {
     font-size: 28px;
@@ -123,40 +97,26 @@
 }
 .vat-note { font-size: 13px; color: #666; }
 
-/* Khung khuyến mãi */
+/* Khuyến mãi */
 .promo-container { margin: 20px 0; }
-.promo-box { border: 1px solid #d70018; border-radius: 5px; overflow: hidden; }
+.promo-box {
+    border: 1px solid #d70018;
+    border-radius: 5px;
+    overflow: hidden;
+}
 .box-header {
     background: #d70018; color: #fff;
-    padding: 8px; font-weight: bold;
-    text-align: center;
+    padding: 8px; font-weight: bold; text-align: center;
 }
 .box-content { padding: 15px; }
 .box-content ul { list-style: none; padding: 0; margin: 0; }
-.box-content li { margin-bottom: 8px; display: flex; gap: 8px; }
+.box-content li { margin-bottom: 8px; display: flex; gap: 8px; font-size: 14px;}
 .box-content i { color: #d70018; margin-top: 4px; }
 
 /* Nút bấm */
-.btn-buy-now {
+.action-buttons { margin-bottom: 20px; }
+.btn-buy-now, .btn-installment {
     width: 100%;
-    background: #d70018;
-    color: #fff;
-    border: none;
-    padding: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.btn-buy-now strong { font-size: 18px; }
-
-.btn-group-row { display: flex; gap: 10px; }
-.btn-installment {
-    flex: 1;
-    background: #2f80ed;
-    color: #fff;
     border: none;
     padding: 10px;
     border-radius: 5px;
@@ -164,186 +124,145 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    color: #fff;
 }
 
-.consult-form { display: flex; margin-top: 20px; gap: 10px;}
+.btn-buy-now {
+    background: #d70018;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+.btn-buy-now:hover { background: #c40016; }
+.btn-buy-now strong { font-size: 18px; }
+
+.btn-group-row { display: flex; gap: 10px; }
+.btn-installment { background: #2f80ed; }
+.btn-installment:hover { background: #2566be; }
+
+/* Form tư vấn */
+.consult-form { display: flex; gap: 10px; }
 .consult-form input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-.consult-form button { background: #333; color: white; border: none; padding: 0 20px; border-radius: 4px; cursor: pointer;}
+.consult-form button { background: #333; color: white; border: none; padding: 0 20px; border-radius: 4px; cursor: pointer; }
 
-.warranty-badges {
-    display: flex; 
-    flex-direction: column; /* ĐÃ SỬA: Xếp dọc các mục bảo hành */
-    gap: 10px;           
-    margin-bottom: 20px;
-    color: #007bff;
-    font-size: 14px;
-    font-weight: 500;
-    align-items: flex-start;
-}
-/* --- CSS CHO PHẦN MUA THEO COMBO --- */
-
+/* --- PHẦN MUA COMBO (QUAN TRỌNG) --- */
 .combo-wrapper {
     margin-top: 30px;
     background: #fff;
+    border-top: 1px dashed #ddd;
+    padding-top: 20px;
 }
-
 .combo-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #333;
+    font-size: 16px; font-weight: 700; color: #333;
     margin-bottom: 15px;
-    text-transform: none; 
 }
-
-.combo-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
+.combo-list { display: flex; flex-direction: column; gap: 15px; }
 
 .combo-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    display: flex; align-items: flex-start; gap: 10px;
     padding-bottom: 15px;
     border-bottom: 1px dashed #eee;
-    margin-bottom: 15px; /* Thêm khoảng cách dưới mỗi item */
 }
-/* Checkbox */
-.combo-checkbox {
-    width: 18px;
-    height: 18px;
-    margin-top: 5px;
-    cursor: pointer;
-    flex-shrink: 0; /* QUAN TRỌNG: Không cho phép checkbox bị co nhỏ */
+
+/* Ảnh & Nút xóa */
+.icon-remove {
+    color: #dc3545; font-size: 20px; margin-top: 15px; cursor: pointer;
+    transition: transform 0.2s;
 }
+.icon-remove:hover { transform: scale(1.1); }
+
 .combo-img {
-    width: 60px;        /* Cố định chiều rộng */
-    height: 60px;       /* Cố định chiều cao */
-    flex-shrink: 0;     /* QUAN TRỌNG: Ngăn khung ảnh bị ép nhỏ hoặc phình to */
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    display: flex;      /* Để căn giữa ảnh bên trong */
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    overflow: hidden;   /* Cắt phần thừa nếu ảnh quá to */
+    width: 60px; height: 60px; flex-shrink: 0;
+    border: 1px solid #ddd; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff; padding: 2px;
 }
-/* Ảnh sản phẩm combo */
 .combo-img img {
-    width: 100%;        /* Chiếm hết chiều rộng khung */
-    height: 100%;       /* Chiếm hết chiều cao khung */
-    object-fit: contain; /* Giữ tỷ lệ ảnh, không bị méo */
-    border: none;       /* Bỏ border ở thẻ img vì đã có ở div cha */
+    width: 100%; height: 100%; object-fit: contain;
 }
 
-/* Thông tin tên và giá */
+/* Thông tin Combo */
 .combo-info {
-    flex: 1;            /* Chiếm toàn bộ khoảng trống còn lại */
-    min-width: 0;       /* Mẹo Fix lỗi flexbox: giúp text tự xuống dòng thay vì đẩy khung ra */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column; justify-content: space-between;
 }
-
 .combo-name {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.3;
-    margin-bottom: 5px;
-    
-    /* Cắt bớt tên nếu quá dài (tối đa 2 dòng) */
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    font-size: 14px; color: #333; margin-bottom: 5px; line-height: 1.3;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
+.combo-name a { color: #333; text-decoration: none; }
+.combo-name a:hover { color: #007bff; }
+
 .combo-row-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end; /* Căn đáy */
-    flex-wrap: wrap;       /* Cho phép xuống dòng nếu màn hình quá nhỏ */
-    gap: 5px;
+    display: flex; justify-content: space-between; align-items: flex-end;
 }
+.combo-price { color: #d70018; font-weight: 700; font-size: 15px; }
 
-.combo-price {
-    color: #d70018;
-    font-weight: 700;
-    font-size: 15px;
-}
-
-.link-change {
-    font-size: 12px;
-    color: #007bff;
-    text-decoration: none;
-    white-space: nowrap; /* Giữ dòng chữ "Chọn sản phẩm khác" trên 1 dòng */
-}  text-decoration: none;
-}
-.link-change:hover { text-decoration: underline; }
-
-/* Nút dấu cộng thêm sản phẩm */
+/* Nút thêm */
 .combo-add-more {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 5px;
-    cursor: pointer;
+    display: flex; align-items: center; gap: 10px; margin-top: 5px; cursor: pointer;
 }
 .icon-plus {
-    width: 30px; height: 30px;
-    border: 1px dashed #aaa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: #888;
-    border-radius: 4px;
+    width: 30px; height: 30px; border: 1px dashed #aaa; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center; color: #888;
 }
-.combo-add-more span {
-    color: #007bff;
-    font-size: 13px;
-}
+.combo-add-more span { color: #007bff; font-size: 13px; font-weight: 500; }
 
-/* Footer tổng tiền */
+/* Footer Combo */
 .combo-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    gap: 15px;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 20px; gap: 15px;
 }
-
 .btn-buy-combo {
-    background-color: #007bff; 
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 14px;
-    cursor: pointer;
-    flex: 1;
-    text-transform: uppercase;
-    transition: 0.3s;
+    flex: 1; background: #007bff; color: #fff;
+    border: none; padding: 10px; border-radius: 5px;
+    font-weight: bold; cursor: pointer; text-transform: uppercase;
 }
-.btn-buy-combo:hover {
-    background-color: #0056b3;
-}
+.btn-buy-combo:hover { background: #0056b3; }
 
-.combo-total-info {
-    text-align: right;
-    font-size: 13px;
+.combo-total-info { text-align: right; font-size: 13px; }
+.combo-total-info .total span { color: #d70018; font-size: 16px; font-weight: bold; margin-left: 5px; }
+
+/* --- MODAL (POPUP) --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5); z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
 }
-.combo-total-info .saving {
-    color: #666;
-    margin-bottom: 3px;
+.modal-content {
+    background: white; width: 500px; max-height: 80vh;
+    border-radius: 8px; display: flex; flex-direction: column;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
-.combo-total-info .total {
-    font-weight: bold;
-    color: #333;
+.modal-header {
+    padding: 15px; border-bottom: 1px solid #eee;
+    display: flex; justify-content: space-between; align-items: center;
 }
-.combo-total-info .total span {
-    color: #d70018;
-    font-size: 16px;
-    margin-left: 5px;
+.modal-header h3 { margin: 0; font-size: 18px; }
+.close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #666; }
+
+.modal-body { padding: 15px; overflow-y: auto; }
+.modal-item {
+    display: flex; align-items: center; padding: 10px;
+    border-bottom: 1px solid #f9f9f9;
+}
+.modal-item img {
+    width: 50px; height: 50px; object-fit: cover; margin-right: 10px; border: 1px solid #eee;
+}
+.modal-item-info { flex: 1; }
+.modal-item-name { font-size: 13px; font-weight: 500; }
+.modal-item-price { color: #d70018; font-weight: bold; font-size: 13px; }
+
+.btn-add-acc {
+    background: #28a745; color: white; border: none;
+    padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;
+}
+.btn-add-acc:disabled { background: #ccc; cursor: not-allowed; }
+.btn-add-acc:hover:not(:disabled) { background: #218838; }
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+    .detail-main-content { flex-direction: column; }
+    .detail-left, .detail-right { width: 100%; max-width: 100%; }
+    .modal-content { width: 95%; }
 }

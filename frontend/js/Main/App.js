@@ -6,8 +6,9 @@ const MainLayout = () => {
     const currentPath = location.pathname.toLowerCase();
     
     // Các trang không hiện Menu
-    const noMenuPaths = ['/login', '/register', '/cart', '/contact'];
+    const noMenuPaths = ['/login', '/register', '/cart', '/contact', '/profile', '/orders', '/checkout'];
     const showMenu = !noMenuPaths.includes(currentPath);
+
 
     return (
         <div className="app-root">
@@ -29,8 +30,10 @@ const MainLayout = () => {
                             <Route exact path="/" component={window.Home} />
                             <Route path="/products" component={window.Products} />
                             <Route path="/detail/:id" component={window.Detail} />
-                            
-                            {/* Login & Register */}
+                            <Route path="/cart" component={window.Cart} />
+                    
+                            <Route path="/checkout" component={window.Checkout} /> 
+
                             <Route path="/login" component={window.Login} />
                             <Route path="/register" component={window.Register} />
                         </Switch>
