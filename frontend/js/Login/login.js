@@ -28,16 +28,16 @@ const Login = () => {
 
             const data = await response.json();
 
+           // js/Login.js
+
             if (response.ok) {
-                // Đăng nhập thành công
-                localStorage.setItem("isLoggedIn", "true");
                 localStorage.setItem("user", JSON.stringify(data));
 
-                // V5: Dùng history.push để chuyển trang
-                history.push("/"); 
-                // Hoặc window.location.href = "/" nếu muốn reload lại Header
-            } else {
-                setError(data.message || "Đăng nhập thất bại!");
+                // --- SỬA DÒNG NÀY ---
+                // Cũ: window.location.href = "/";
+                // Mới: Chuyển hướng về trang chủ (Hash) rồi tải lại trang
+                window.location.hash = "/"; 
+                window.location.reload(); 
             }
 
         } catch (err) {

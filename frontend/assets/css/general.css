@@ -202,3 +202,100 @@ body {
     margin-top: 30px;
 }
 
+/* --- PHẦN MỚI: MENU TÀI KHOẢN (Dán vào cuối file CSS) --- */
+
+/* 1. Vùng bao quanh tên người dùng (Để căn vị trí menu con) */
+.account-wrapper {
+    position: relative; /* Quan trọng: để menu con bám theo cái này */
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* 2. Style cho cái tên hiển thị trên thanh Header */
+.user-name {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa icon và tên */
+    color: #000000; /* Màu chữ trắng giống header */
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 20px; /* Bo tròn nhẹ */
+    transition: background 0.2s;
+    user-select: none; /* Không cho bôi đen chữ */
+}
+
+.user-name:hover {
+    background-color: rgba(255, 255, 255, 0.15); /* Hiệu ứng sáng lên khi di chuột */
+}
+
+/* 3. Khung Menu thả xuống (Mặc định React ẩn, khi hiện sẽ dùng style này) */
+.user-dropdown {
+    position: absolute;
+    top: 120%; /* Đẩy xuống dưới tên một chút */
+    right: 0;   /* Căn phải thẳng hàng với tên */
+    width: 200px; /* Độ rộng menu */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Đổ bóng đẹp */
+    z-index: 1000; /* Đè lên mọi thứ khác */
+    overflow: hidden;
+    animation: fadeIn 0.2s ease-in-out; /* Hiệu ứng hiện ra từ từ */
+}
+
+/* Mũi tên nhọn chỉ lên trên (Trang trí cho đẹp) */
+.user-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    right: 20px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    transform: rotate(45deg);
+}
+
+/* 4. Các mục bên trong menu (Hồ sơ, Đơn hàng...) */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #333 !important; /* Màu chữ đen (ghi đè màu trắng của header) */
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none; /* Bỏ gạch chân mục cuối */
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa; /* Màu nền xám nhạt khi di chuột */
+    color: #007bff !important; /* Chữ chuyển xanh */
+    padding-left: 25px; /* Hiệu ứng đẩy chữ sang phải chút xíu */
+}
+
+.dropdown-item i {
+    width: 25px; /* Căn thẳng hàng icon */
+    text-align: center;
+    margin-right: 5px;
+    color: #666;
+}
+
+/* 5. Nút đăng xuất (Màu đỏ cho nổi bật) */
+.logout-btn {
+    color: #dc3545 !important;
+    font-weight: 500;
+}
+.logout-btn:hover {
+    background-color: #fff5f5;
+    color: #dc3545 !important;
+}
+
+/* Hiệu ứng hiện menu mượt mà */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
