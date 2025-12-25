@@ -3,10 +3,11 @@ const DATA_PRODUCTS = [
         id: 1, 
         name: "Thinkpad E14 Gen 7 21SX002QVA Ultra 5 225U", 
         price: "20.490.000", 
-        img: "img/892x556_1762486949.webp",
+        img: "img/1.jpg",
         cat: "office",
         badge: "BH 24 tháng Lenovo VN, full VAT",
         status: "Sẵn hàng",
+        stock: 50, // <--- Đã thêm số lượng
         specs: {
             cpu: "Intel® Core Ultra 5 225U (12 nhân (2Pcore + 8Ecore + 2LowpowerEcore) / 14 luồng, tối đa 4.8GHz, 12MB Cache)",
             ram: "16GB DDR5 5600 (1 thanh 16GB có sẵn, còn trống 1 khe)",
@@ -32,7 +33,7 @@ const DATA_PRODUCTS = [
             origin: "China"
         }
     },
-   { 
+    { 
         id: 2, 
         name: "Thinkpad E16 Gen 3 21SR002JVA Ultra 5 225U", 
         price: "21.290.000", 
@@ -40,11 +41,12 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "BH 24 tháng Lenovo VN, full VAT",
         status: "Sẵn hàng",
+        stock: 30, // <--- Đã thêm số lượng
         specs: {
             cpu: "Intel® Core Ultra 5 225U (12 nhân, 14 luồng, tối đa 4.8GHz, 12MB Cache)",
             ram: "16GB DDR5 5600MHz (Nâng cấp tối đa 64GB)",
             storage: "512GB SSD M.2 2242 PCIe® 4.0x4 NVMe® (Còn trống 1 khe 2280)",
-            display: "16 inch WUXGA (1920x1200) IPS, 300nits, Anti-glare, 45% NTSC",
+            display: "16 inch WUXGA (1920x1200) IPS, 300nits, Anti-glare, 45% NTSC",z
             gpu: "Intel® Graphics (Hỗ trợ Arc Graphics khi chạy Dual RAM)",
             os: "No OS",
             keyboard: "Full size có phím số, có đèn nền",
@@ -73,6 +75,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "Săn Hàng Tại Showroom",
         status: "Sẵn hàng",
+        stock: 15,
         specs: {
             cpu: "AMD Ryzen™ 7 8845H (8 nhân 16 luồng, tối đa 5.1GHz, AI Engine)",
             ram: "32GB LPDDR5x 6400MHz (Onboard)",
@@ -106,6 +109,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "BH 24 tháng Asus VN, full VAT",
         status: "Sẵn hàng",
+        stock: 20,
         specs: {
             cpu: "Intel® Core™ i7-13650HX (14 nhân, 20 luồng, tối đa 4.9GHz)",
             ram: "16GB DDR5 4800MHz (2 khe, tối đa 32GB)",
@@ -139,6 +143,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Hàng Mới Về, Giá Shock!!!",
         status: "Sẵn hàng",
+        stock: 40,
         specs: {
             cpu: "Intel® Core™ i5-13500H (12 nhân, 16 luồng, tối đa 4.7GHz)",
             ram: "16GB DDR4 3200MHz (8GB Onboard + 8GB rời)",
@@ -172,6 +177,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "Deal cực ngon!!! BH Asus VN",
         status: "Sẵn hàng",
+        stock: 25,
         specs: {
             cpu: "AMD Ryzen™ 7 7735HS (8 nhân 16 luồng, tối đa 4.75GHz)",
             ram: "8GB DDR5 4800MHz (2 khe RAM, đã lắp 1)",
@@ -205,6 +211,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "BH 24 tháng Asus VN, full VAT",
         status: "Sẵn hàng",
+        stock: 35,
         specs: {
             cpu: "Intel® Core™ Ultra 5 125H (14 nhân, 18 luồng, AI Boost)",
             ram: "16GB LPDDR5X 7467MHz (Onboard)",
@@ -238,6 +245,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "BH 24 tháng Lenovo VN, full VAT",
         status: "Sẵn hàng",
+        stock: 60,
         specs: {
             cpu: "AMD Ryzen™ 7 7730U (8 nhân 16 luồng)",
             ram: "16GB DDR4 3200MHz (Onboard)",
@@ -271,6 +279,7 @@ const DATA_PRODUCTS = [
         cat: "macbook",
         badge: "Apple Care+ 12 tháng, Fullbox",
         status: "Sẵn hàng",
+        stock: 22,
         specs: {
             cpu: "Apple M2 chip with 8-core CPU and 8-core GPU",
             ram: "8GB Unified Memory",
@@ -304,6 +313,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Siêu phẩm doanh nhân, Màn OLED",
         status: "Sẵn hàng",
+        stock: 10,
         specs: {
             cpu: "Intel Core i7-1360P (12 nhân, 16 luồng, tối đa 5.0GHz, 18MB Cache)",
             ram: "16GB LPDDR5 6000MHz (Onboard)",
@@ -337,6 +347,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "Best Choice Gaming 2024",
         status: "Sẵn hàng",
+        stock: 28,
         specs: {
             cpu: "AMD Ryzen™ 7 7735HS (8 nhân 16 luồng, tối đa 4.75GHz)",
             ram: "16GB DDR5 4800MHz (2 khe, nâng cấp tối đa 64GB)",
@@ -370,6 +381,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Xoay gập 360 độ, Cảm ứng",
         status: "Sẵn hàng",
+        stock: 32,
         specs: {
             cpu: "Intel Core i5-1335U (10 nhân, 12 luồng, tối đa 4.6GHz)",
             ram: "16GB LPDDR5 6400MHz (Onboard)",
@@ -403,6 +415,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "Quốc dân Gaming, Tản nhiệt mát",
         status: "Sẵn hàng",
+        stock: 45,
         specs: {
             cpu: "Intel Core i5-13420H (8 nhân, 12 luồng, tối đa 4.6GHz)",
             ram: "16GB DDR5 5200MHz (2 khe)",
@@ -436,6 +449,7 @@ const DATA_PRODUCTS = [
         cat: "macbook",
         badge: "Hiệu năng Pro, Pin trâu",
         status: "Sẵn hàng",
+        stock: 12,
         specs: {
             cpu: "Apple M3 chip with 8-core CPU and 10-core GPU",
             ram: "8GB Unified Memory",
@@ -469,6 +483,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Siêu nhẹ 1.3kg cho màn 17 inch",
         status: "Sẵn hàng",
+        stock: 8,
         specs: {
             cpu: "Intel Core i7-1360P (12 nhân, 16 luồng)",
             ram: "16GB LPDDR5 6000MHz",
@@ -502,6 +517,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "Cấu hình quái vật, LED RGB",
         status: "Sẵn hàng",
+        stock: 9,
         specs: {
             cpu: "Intel Core i9-13980HX (24 nhân, 32 luồng, tối đa 5.6GHz)",
             ram: "16GB DDR5 4800MHz",
@@ -535,6 +551,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Sang trọng, Màn hình 3:2",
         status: "Sẵn hàng",
+        stock: 18,
         specs: {
             cpu: "Intel Core i5-1235U",
             ram: "8GB LPDDR5x",
@@ -568,6 +585,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Giá rẻ cho sinh viên",
         status: "Sẵn hàng",
+        stock: 80,
         specs: {
             cpu: "Intel Core i5-1235U (10 nhân, 12 luồng)",
             ram: "8GB DDR4 3200MHz",
@@ -601,6 +619,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "Gaming mỏng nhẹ giá tốt",
         status: "Sẵn hàng",
+        stock: 38,
         specs: {
             cpu: "Intel Core i7-12650H (10 nhân, 16 luồng)",
             ram: "8GB DDR4 3200MHz (2 khe)",
@@ -634,6 +653,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Màn hình OLED 2.8K 90Hz",
         status: "Sẵn hàng",
+        stock: 26,
         specs: {
             cpu: "Intel Core i5-1340P (12 nhân, 16 luồng)",
             ram: "16GB LPDDR5 (Onboard)",
@@ -667,6 +687,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "Thiết kế thanh lịch, Màn 16.1 inch",
         status: "Sẵn hàng",
+        stock: 33,
         specs: {
             cpu: "Intel Core i5-13500H (12 nhân, 16 luồng)",
             ram: "16GB DDR5 5200MHz",
@@ -700,6 +721,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Bền bỉ chuẩn quân đội",
         status: "Sẵn hàng",
+        stock: 55,
         specs: {
             cpu: "Intel Core i5-1335U",
             ram: "16GB DDR5 5200MHz (2 khe)",
@@ -733,6 +755,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Màn hình OLED rực rỡ",
         status: "Sẵn hàng",
+        stock: 19,
         specs: {
             cpu: "Intel Core i5-13500H (12 nhân, 16 luồng)",
             ram: "16GB LPDDR5 (Onboard)",
@@ -766,6 +789,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "Hiệu năng trên giá thành tốt nhất",
         status: "Sẵn hàng",
+        stock: 37,
         specs: {
             cpu: "Intel Core i5-12450H",
             ram: "8GB DDR4 3200MHz (2 khe)",
@@ -799,6 +823,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "Đẳng cấp Alienware, Build cực xịn",
         status: "Sẵn hàng",
+        stock: 5,
         specs: {
             cpu: "Intel Core i7-13700HX (16 nhân, 24 luồng)",
             ram: "16GB DDR5 4800MHz",
@@ -832,6 +857,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Dành cho Creator, RTX 4050",
         status: "Sẵn hàng",
+        stock: 14,
         specs: {
             cpu: "Intel Core i9-13900H (14 nhân, 20 luồng)",
             ram: "16GB DDR5 (8GB Onboard + 8GB)",
@@ -865,6 +891,7 @@ const DATA_PRODUCTS = [
         cat: "macbook",
         badge: "Huyền thoại giá rẻ, pin trâu",
         status: "Sẵn hàng",
+        stock: 100,
         specs: {
             cpu: "Apple M1 chip 8-core CPU",
             ram: "8GB Unified Memory",
@@ -898,6 +925,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Thiết kế thời trang",
         status: "Sẵn hàng",
+        stock: 65,
         specs: {
             cpu: "Intel Core i5-1335U",
             ram: "8GB DDR4 3200MHz (2 khe)",
@@ -931,6 +959,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Siêu mỏng 1.28kg, Chip R7 mạnh mẽ",
         status: "Sẵn hàng",
+        stock: 21,
         specs: {
             cpu: "AMD Ryzen 7 7840S (8 nhân 16 luồng)",
             ram: "16GB LPDDR5X 6400MHz",
@@ -964,6 +993,7 @@ const DATA_PRODUCTS = [
         cat: "office",
         badge: "Chuẩn doanh nghiệp, Siêu bền",
         status: "Sẵn hàng",
+        stock: 24,
         specs: {
             cpu: "Intel Core i7-1355U (vPro)",
             ram: "16GB LPDDR5 4800MHz (Onboard)",
@@ -997,6 +1027,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "MacBook chạy Windows, Đẳng cấp",
         status: "Sẵn hàng",
+        stock: 3,
         specs: {
             cpu: "Intel Core i7-13800H (14 nhân, 20 luồng)",
             ram: "16GB DDR5 5200MHz",
@@ -1030,6 +1061,7 @@ const DATA_PRODUCTS = [
         cat: "gaming",
         badge: "Bàn phím RGB 4 vùng",
         status: "Sẵn hàng",
+        stock: 42,
         specs: {
             cpu: "Intel Core i7-13620H (10 nhân, 16 luồng)",
             ram: "16GB DDR5 5200MHz (2 khe)",

@@ -13,21 +13,25 @@ public class CartService {
     @Autowired private ProductRepository productRepo;
 
     public void addToCart(String username, Long productId, int quantity) {
-        // 1. Lấy thông tin User và Product từ DB
         User user = userRepo.findByUsername(username).orElseThrow();
         Product product = productRepo.findById(productId).orElseThrow();
 
-        // 2. Kiểm tra xem sản phẩm này đã có trong giỏ của user chưa?
-        // [SỬ DỤNG HÀM VỪA TẠO Ở BƯỚC 1]
+        // --- THÊM KIỂM TRA SỐ LƯỢNG ---
+        if (product.getStock() < quantity) {
+            throw new RuntimeException("Sản phẩm này chỉ còn " + product.getStock() + " chiếc!");
+        }
+
+        // ... (Logic cũ: Tìm existingCart hoặc tạo mới ...)
         Cart existingCart = cartRepo.findByUserAndProduct(user, product);
 
         if (existingCart != null) {
-            // 3A. Nếu CÓ rồi -> Cộng dồn số lượng
-            int newQuantity = existingCart.getQuantity() + quantity;
-            existingCart.setQuantity(newQuantity);
+            // Kiểm tra tổng số lượng sau khi cộng dồn
+            if (existingCart.getQuantity() + quantity > product.getStock()) {
+                throw new RuntimeException("Kho không đủ hàng!");
+            }
+            existingCart.setQuantity(existingCart.getQuantity() + quantity);
             cartRepo.save(existingCart);
         } else {
-            // 3B. Nếu CHƯA có -> Tạo dòng mới
             Cart cart = new Cart();
             cart.setUser(user);
             cart.setProduct(product);
@@ -35,7 +39,6 @@ public class CartService {
             cartRepo.save(cart);
         }
     }
-
     public List<Cart> getMyCart(String username) {
         return cartRepo.findByUser_Username(username);
     }

@@ -14,6 +14,7 @@ public class CheckoutFacade {
     @Autowired private OrderRepository orderRepo;
     @Autowired private OrderDetailRepository orderDetailRepo;
     @Autowired private UserRepository userRepo;
+    @Autowired private ProductRepository productRepo;
 
     @Transactional // Rất quan trọng: Mọi thứ thành công hết hoặc thất bại hết
     public void checkout(String username, String address, String phone) {
@@ -48,6 +49,19 @@ public class CheckoutFacade {
             detail.setTotalPrice(item.getProduct().getPrice() * item.getQuantity());
 
             orderDetailRepo.save(detail);
+
+            // --- THÊM ĐOẠN NÀY ĐỂ TRỪ KHO ---
+            Product product = item.getProduct();
+            int newStock = product.getStock() - item.getQuantity();
+
+            // Đảm bảo không bị âm kho (Logic an toàn)
+            if (newStock < 0) {
+                throw new RuntimeException("Sản phẩm " + product.getName() + " đã hết hàng!");
+            }
+
+            product.setStock(newStock);
+            // productRepo chưa được khai báo ở trên thì bạn phải @Autowired thêm vào nhé
+            productRepo.save(product);
         }
 
         // 4. Xóa giỏ hàng

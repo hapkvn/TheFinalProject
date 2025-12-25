@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "products") // Tên bảng trong MySQL
+@Table(name = "products")
 @Data
 public class Product {
     @Id
@@ -19,7 +19,11 @@ public class Product {
 
     private String img;
 
-    private String cat; // Danh mục (category): laptop, mouse...
+    private String cat;
 
-    private String status; // Ví dụ: "Sẵn hàng"
+    private String status;
+
+    // --- THÊM DÒNG NÀY ---
+    @Column(columnDefinition = "integer default 10")
+    private Integer stock;
 }

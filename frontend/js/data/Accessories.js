@@ -8,6 +8,7 @@ const DATA_ACCESSORIES = [
         cat: "monitor",
         badge: "Best Seller tầm trung",
         status: "Sẵn hàng",
+        stock: 50, // <--- Đã thêm số lượng
         specs: {
             type: "Màn hình Gaming phẳng",
             size: "23.8 inch",
@@ -27,6 +28,7 @@ const DATA_ACCESSORIES = [
         cat: "monitor",
         badge: "Chuẩn màu đồ họa",
         status: "Sẵn hàng",
+        stock: 20,
         specs: {
             type: "Màn hình đồ họa",
             size: "23.8 inch",
@@ -46,6 +48,7 @@ const DATA_ACCESSORIES = [
         cat: "monitor",
         badge: "Màn to, tần số quét cao",
         status: "Sẵn hàng",
+        stock: 35,
         specs: {
             type: "Màn hình Gaming",
             size: "27 inch",
@@ -67,6 +70,7 @@ const DATA_ACCESSORIES = [
         cat: "keyboard",
         badge: "Ngon - Bổ - Rẻ",
         status: "Sẵn hàng",
+        stock: 100,
         specs: {
             type: "Bàn phím cơ (Tenkeyless)",
             switch: "D-Switch (Blue/Brown/Red)",
@@ -86,6 +90,7 @@ const DATA_ACCESSORIES = [
         cat: "keyboard",
         badge: "Build cực đầm, Hotswap",
         status: "Còn ít",
+        stock: 5,
         specs: {
             type: "Bàn phím cơ Custom (75%)",
             switch: "Kailh Box Cool Mint",
@@ -105,6 +110,7 @@ const DATA_ACCESSORIES = [
         cat: "keyboard",
         badge: "Vua văn phòng",
         status: "Sẵn hàng",
+        stock: 15,
         specs: {
             type: "Bàn phím văn phòng cao cấp",
             switch: "Scissor (Kéo cắt)",
@@ -126,6 +132,7 @@ const DATA_ACCESSORIES = [
         cat: "mouse",
         badge: "Chuột quốc dân",
         status: "Sẵn hàng",
+        stock: 150,
         specs: {
             type: "Chuột Gaming có dây",
             dpi: "200 - 8.000 DPI",
@@ -145,6 +152,7 @@ const DATA_ACCESSORIES = [
         cat: "mouse",
         badge: "Đỉnh cao productivity",
         status: "Sẵn hàng",
+        stock: 25,
         specs: {
             type: "Chuột văn phòng cao cấp",
             dpi: "8.000 DPI (Kính cũng di được)",
@@ -164,6 +172,7 @@ const DATA_ACCESSORIES = [
         cat: "mouse",
         badge: "Siêu nhẹ 58g",
         status: "Sẵn hàng",
+        stock: 10,
         specs: {
             type: "Chuột Gaming Esport",
             dpi: "30.000 DPI (Focus Pro 30K)",
@@ -185,6 +194,7 @@ const DATA_ACCESSORIES = [
         cat: "audio",
         badge: "Huyền thoại FPS",
         status: "Sẵn hàng",
+        stock: 40,
         specs: {
             type: "Tai nghe chụp tai (Over-ear)",
             sound: "Giả lập 7.1 Surround",
@@ -204,6 +214,7 @@ const DATA_ACCESSORIES = [
         cat: "audio",
         badge: "Chống ồn chủ động tốt nhất",
         status: "Sẵn hàng",
+        stock: 8,
         specs: {
             type: "Tai nghe Bluetooth Over-ear",
             sound: "Hi-Res Audio, DSEE Extreme",
@@ -223,6 +234,7 @@ const DATA_ACCESSORIES = [
         cat: "audio",
         badge: "Nhỏ gọn, Bass lực",
         status: "Sẵn hàng",
+        stock: 12,
         specs: {
             type: "Loa di động",
             sound: "Stereo 360 độ (True Stereophonic)",
