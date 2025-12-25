@@ -8,15 +8,12 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    // 1. Hàm có sẵn của JpaRepository:
-    // save(Order order) -> Đã có sẵn, không cần viết
-
-    // 2. Hàm tìm kiếm tùy chỉnh:
-
-    // Tìm danh sách đơn hàng của một người dùng cụ thể (Theo username)
-    // Giúp hiển thị "Lịch sử mua hàng"
+    // 1. Tìm đơn hàng theo Username (Cơ bản - Không sắp xếp)
     List<Order> findByUser_Username(String username);
 
-    // Hoặc tìm theo ID người dùng
+    // 2. Tìm theo User ID
     List<Order> findByUserId(Long userId);
+
+
+    List<Order> findByUser_UsernameOrderByCreatedAtDesc(String username);
 }

@@ -31,7 +31,8 @@ const MainLayout = () => {
                             <Route path="/products" component={window.Products} />
                             <Route path="/detail/:id" component={window.Detail} />
                             <Route path="/cart" component={window.Cart} />
-                    
+                            <Route path="/orders" component={window.OrderHistory} />
+                                                
                             <Route path="/checkout" component={window.Checkout} /> 
 
                             <Route path="/login" component={window.Login} />

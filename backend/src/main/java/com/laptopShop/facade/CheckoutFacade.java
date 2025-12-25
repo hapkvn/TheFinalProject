@@ -26,7 +26,7 @@ public class CheckoutFacade {
 
         // 2. Tạo đơn hàng (Order)
         Order order = new Order();
-        order.setUser(user);
+        order.setFullname(user.getFullName());
         order.setAddress(address);
         order.setPhone(phone);
         order.setStatus("PENDING");

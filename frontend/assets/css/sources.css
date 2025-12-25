@@ -112,6 +112,43 @@
     gap: 15px; /* Khớp với product.css */
 }
 
-/* QUAN TRỌNG: Không viết lại .product-card ở đây 
-   để nó tự nhận style từ file product.css 
-*/
+/* --- BỔ SUNG CSS CHO CARD SẢN PHẨM --- */
+
+/* 1. Định hình khung chứa ảnh */
+.product-card .img-container {
+    width: 100%;
+    height: 200px; /* Bắt buộc: Set chiều cao cố định cho khung */
+    background-color: #fff; /* Nền trắng */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Cắt bỏ phần thừa nếu ảnh quá to */
+    padding: 10px; /* Tạo khoảng hở đệm để ảnh không dính sát viền */
+}
+
+/* 2. Định hình ảnh bên trong */
+.product-card .img-container img {
+    width: 100%;
+    height: 100%;
+  
+    object-fit: contain; 
+    transition: transform 0.3s ease; /* Hiệu ứng mượt */
+}
+
+
+.product-card:hover .img-container img {
+    transform: scale(1.05); /* Phóng to nhẹ ảnh khi hover */
+}
+
+/* 4. Đảm bảo Card có nền trắng và border đẹp (Nếu product.css chưa có) */
+.product-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}

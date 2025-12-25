@@ -131,3 +131,102 @@
     .col-info { width: 100%; flex: none; margin-bottom: 10px; }
     .col-price, .col-qty, .col-total { flex: 1; text-align: left; }
 }
+/* --- BỔ SUNG CSS CHO TRANG LỊCH SỬ ĐƠN HÀNG (ORDER HISTORY) --- */
+
+/* Container danh sách đơn hàng */
+.order-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px; /* Rộng hơn giỏ hàng chút */
+    margin: 0 auto;
+}
+
+/* Thẻ đơn hàng (Card) */
+.order-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0; /* Header và Footer tự padding */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+.order-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Header của Card */
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    border-radius: 8px 8px 0 0;
+}
+
+.order-date {
+    color: #888;
+    font-size: 13px;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+/* Trạng thái đơn hàng (Màu sắc) */
+.order-status { 
+    font-weight: bold; 
+    padding: 5px 12px; 
+    border-radius: 20px; 
+    font-size: 12px; 
+    text-transform: uppercase;
+}
+
+/* Các màu trạng thái cụ thể */
+.status-pending { color: #e57e00; background: #fff8e1; border: 1px solid #ffeeba; } /* Vàng */
+.status-unpaid { color: #d70018; background: #ffe6e6; border: 1px solid #ffcccc; } /* Đỏ */
+.status-paid, .status-success, .status-delivered { color: #28a745; background: #d4edda; border: 1px solid #c3e6cb; } /* Xanh */
+
+/* Nội dung đơn hàng */
+.order-body {
+    padding: 20px;
+}
+.order-info-line {
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.order-info-line i {
+    width: 20px;
+    text-align: center;
+    color: #999;
+}
+
+/* Tóm tắt sản phẩm trong đơn (nếu có) */
+.order-items-summary {
+    margin-top: 15px;
+    padding: 10px;
+    background: #fcfcfc;
+    border: 1px dashed #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #666;
+}
+
+/* Footer tổng tiền */
+.order-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    text-align: right;
+    font-size: 15px;
+}
+.order-total {
+    color: #d70018;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 10px;
+}
