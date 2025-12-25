@@ -13,21 +13,32 @@ const Checkout = () => {
     const username = userStored ? userStored.username : null;
 
     // 1. Tải danh sách sản phẩm
+    // 1. Tải danh sách sản phẩm
     useEffect(() => {
-        if (!username) {
-            alert("Vui lòng đăng nhập!");
-            history.push("/login");
-            return;
-        }
+        if (!username) { /* ... giữ nguyên logic check login ... */ return; }
+
+        // Lấy danh sách ID đã chọn từ trang Cart
+        const checkoutIdsRaw = localStorage.getItem("checkoutIds");
+        const checkoutIds = checkoutIdsRaw ? JSON.parse(checkoutIdsRaw) : [];
 
         fetch(`http://localhost:8088/api/cart?username=${username}`)
             .then(res => res.json())
             .then(data => {
-                if (data.length === 0) {
-                    alert("Không có sản phẩm nào để thanh toán!");
-                    history.push("/");
+                if (Array.isArray(data)) {
+                    // --- LỌC SẢN PHẨM Ở ĐÂY ---
+                    // Nếu có danh sách chọn, chỉ giữ lại những item có id nằm trong danh sách đó
+                    let selectedItems = data;
+                    if (checkoutIds.length > 0) {
+                        selectedItems = data.filter(item => checkoutIds.includes(item.id));
+                    }
+
+                    if (selectedItems.length === 0) {
+                        alert("Không có sản phẩm nào để thanh toán!");
+                        history.push("/cart"); // Quay về giỏ hàng nếu rỗng
+                    }
+                    
+                    setCartItems(selectedItems);
                 }
-                setCartItems(data);
             })
             .catch(err => console.error(err));
     }, [username]);
@@ -85,7 +96,7 @@ const Checkout = () => {
                         <input 
                             type="text" 
                             className="checkout-input" 
-                            value={userStored?.fullName || ""} 
+                           value={(userStored && userStored.fullName) || ""} 
                             disabled 
                         />
                     </div>

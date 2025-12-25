@@ -34,8 +34,14 @@ public class CartController {
         Long productId = Long.valueOf(payload.get("productId").toString());
         int quantity = (int) payload.get("quantity");
 
-        cartService.addToCart(username, productId, quantity);
-        return ResponseEntity.ok("Đã thêm vào giỏ!");
+        // --- Lấy tham số isCombo (nếu không gửi thì mặc định là false) ---
+        boolean isCombo = false;
+        if (payload.containsKey("isCombo")) {
+            isCombo = (boolean) payload.get("isCombo");
+        }
+
+        cartService.addToCart(username, productId, quantity, isCombo);
+        return ResponseEntity.ok(Map.of("message", "Thêm thành công"));
     }
 
     // 3. Xóa giỏ hàng (Sau này làm thêm xóa từng món)
@@ -43,5 +49,10 @@ public class CartController {
     public ResponseEntity<?> clearCart(@RequestParam String username) {
         cartService.clearCart(username);
         return ResponseEntity.ok("Đã xóa giỏ hàng");
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCartItem(@PathVariable Long id) {
+        cartService.deleteCartItem(id);
+        return ResponseEntity.ok("Xóa thành công!");
     }
 }

@@ -1,39 +1,55 @@
+const { useState, useEffect } = React;
+// 1. Lấy useHistory từ ReactRouterDOM
+const { useHistory, Link } = ReactRouterDOM;
+
 const Cart = () => {
-    // 1. Khởi tạo giỏ hàng rỗng
+    const history = useHistory(); // Khởi tạo history
     const [cartItems, setCartItems] = useState([]);
     const [checkedIds, setCheckedIds] = useState([]);
     
-    // Lấy user từ localStorage (để biết ai đang đăng nhập)
     const userStored = JSON.parse(localStorage.getItem("user"));
     const username = userStored ? userStored.username : null;
+
+    // Trong Cart.js, đoạn useEffect
+    // File: js/user/Cart.js
+
+    // ... (code cũ)
 
     // 2. GỌI API LẤY GIỎ HÀNG KHI VÀO TRANG
     useEffect(() => {
         if (username) {
+            // --- SỬA LẠI DÒNG NÀY (Bỏ dấu 3 chấm đi) ---
             fetch(`http://localhost:8088/api/cart?username=${username}`)
                 .then(res => res.json())
                 .then(data => {
-                    // Dữ liệu từ Java trả về có cấu trúc: 
-                    // [{id: 1, product: {name: "Dell", price: ...}, quantity: 1}, ...]
-                    // Ta cần map lại một chút cho khớp giao diện React cũ nếu cần
-                    const mappedData = data.map(item => ({
-                        id: item.id,
-                        productId: item.product.id,
-                        name: item.product.name,
-                        price: item.product.price,
-                        img: item.product.img,
-                        quantity: item.quantity,
-                        combos: [] // Tạm thời để trống combo nếu chưa xử lý
-                    }));
+                    const mappedData = data.map(item => {
+                        let cartItem = {
+                            id: item.id,
+                            productId: item.product.id,
+                            name: item.product.name,
+                            price: item.product.price,
+                            img: item.product.img,
+                            quantity: item.quantity,
+                            combos: [] 
+                        };
+
+                        // Logic xử lý combo
+                        if (item.combo) { 
+                            cartItem.combos.push({
+                                id: 999,
+                                name: "Quà tặng: Chuột Logitech G102",
+                                price: 0, 
+                                img: "https://product.hstatic.net/1000026716/product/logitech-g102-gen2-lightsync-black-01_1669c7f66a2c476785050302eb233941_master.jpg"
+                            });
+                        }
+                        return cartItem;
+                    });
                     setCartItems(mappedData);
                 })
                 .catch(err => console.error("Lỗi tải giỏ hàng:", err));
         }
     }, [username]);
-
-    // --- HÀM XỬ LÝ ---
-
-    // 1. Tăng giảm số lượng
+    // --- CÁC HÀM XỬ LÝ CŨ (Giữ nguyên) ---
     const updateQuantity = (id, delta) => {
         const newCart = cartItems.map(item => {
             if (item.id === id) {
@@ -45,16 +61,24 @@ const Cart = () => {
         setCartItems(newCart);
     };
 
-    // 2. Xóa sản phẩm (Xóa cả cụm)
-    const removeItem = (id) => {
-        if (window.confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
-            setCartItems(cartItems.filter(item => item.id !== id));
-            // Bỏ tick nếu đang chọn
-            setCheckedIds(checkedIds.filter(checkedId => checkedId !== id));
+    const handleRemoveItem = async (cartId) => {
+        if (!window.confirm("Bạn có chắc muốn xóa sản phẩm này?")) return;
+        try {
+            const response = await fetch(`http://localhost:8088/api/cart/${cartId}`, {
+                method: "DELETE"
+            });
+            if (response.ok) {
+                setCartItems(cartItems.filter(item => item.id !== cartId));
+                setCheckedIds(checkedIds.filter(id => id !== cartId));
+                alert("Đã xóa sản phẩm!");
+            } else {
+                alert("Lỗi khi xóa sản phẩm!");
+            }
+        } catch (error) {
+            console.error("Lỗi kết nối:", error);
         }
     };
 
-    // 3. Xử lý checkbox chọn mua
     const handleCheck = (id) => {
         if (checkedIds.includes(id)) {
             setCheckedIds(checkedIds.filter(item => item !== id));
@@ -63,7 +87,6 @@ const Cart = () => {
         }
     };
 
-    // 4. Chọn tất cả
     const handleCheckAll = () => {
         if (checkedIds.length === cartItems.length) {
             setCheckedIds([]);
@@ -72,15 +95,32 @@ const Cart = () => {
         }
     };
 
+    // --- HÀM MỚI: XỬ LÝ MUA HÀNG ---
+    // --- HÀM MỚI: XỬ LÝ MUA HÀNG ---
+    const handleCheckout = () => {
+        if (!username) {
+            alert("Vui lòng đăng nhập để mua hàng!");
+            history.push("/login");
+            return;
+        }
+
+        if (checkedIds.length === 0) {
+            alert("Bạn chưa chọn sản phẩm nào để thanh toán!");
+            return;
+        }
+
+        // --- QUAN TRỌNG: Lưu danh sách ID đã chọn vào bộ nhớ tạm ---
+        localStorage.setItem("checkoutIds", JSON.stringify(checkedIds));
+
+        // Chuyển hướng
+        history.push("/checkout");
+    };
+
     // --- TÍNH TOÁN TỔNG TIỀN ---
     const totalAmount = cartItems.reduce((sum, item) => {
-        // Chỉ tính tiền nếu sản phẩm được chọn (checked)
         if (checkedIds.includes(item.id)) {
-            // Giá main = Giá * Số lượng
             const mainTotal = item.price * item.quantity;
-            // Giá combo = Tổng giá phụ kiện * Số lượng (Phụ kiện cũng nhân theo số lượng máy)
             const comboTotal = item.combos.reduce((acc, combo) => acc + combo.price, 0) * item.quantity;
-            
             return sum + mainTotal + comboTotal;
         }
         return sum;
@@ -99,9 +139,8 @@ const Cart = () => {
                 </div>
             ) : (
                 <div className="cart-content">
-                    {/* --- CỘT TRÁI: DANH SÁCH --- */}
+                    {/* CỘT TRÁI (Giữ nguyên nội dung hiển thị) */}
                     <div className="cart-list">
-                        
                         <div className="cart-header-row">
                             <label className="checkbox-wrap">
                                 <input 
@@ -119,10 +158,7 @@ const Cart = () => {
 
                         {cartItems.map(item => (
                             <div className="cart-item-block" key={item.id}>
-                                
-                                {/* 1. DÒNG SẢN PHẨM CHÍNH */}
                                 <div className="main-product-row">
-                                    {/* Checkbox mua hàng */}
                                     <div className="col-check">
                                         <input 
                                             type="checkbox" 
@@ -130,8 +166,6 @@ const Cart = () => {
                                             onChange={() => handleCheck(item.id)}
                                         />
                                     </div>
-
-                                    {/* Ảnh & Tên */}
                                     <div className="col-info">
                                         <img src={item.img || "https://via.placeholder.com/80"} alt={item.name} />
                                         <div className="info-text">
@@ -141,49 +175,31 @@ const Cart = () => {
                                             </div>
                                         </div>
                                     </div>
-
-                                    {/* Đơn giá */}
-                                    <div className="col-price">
-                                        {formatPrice(item.price)} ₫
-                                    </div>
-
-                                    {/* Số lượng */}
+                                    <div className="col-price">{formatPrice(item.price)} ₫</div>
                                     <div className="col-qty">
                                         <button onClick={() => updateQuantity(item.id, -1)}>-</button>
                                         <input type="text" value={item.quantity} readOnly />
                                         <button onClick={() => updateQuantity(item.id, 1)}>+</button>
                                     </div>
-
-                                    {/* Thành tiền (Main * Qty) */}
-                                    <div className="col-total">
-                                        {formatPrice(item.price * item.quantity)} ₫
-                                    </div>
-
-                                    {/* Nút xóa */}
+                                    <div className="col-total">{formatPrice(item.price * item.quantity)} ₫</div>
                                     <div className="col-action">
-                                        <i className="fa-regular fa-trash-can" onClick={() => removeItem(item.id)}></i>
+                                        <i className="fa-regular fa-trash-can" onClick={() => handleRemoveItem(item.id)}></i>
                                     </div>
                                 </div>
-
-                                {/* 2. DANH SÁCH PHỤ KIỆN ĐI KÈM (Hiện nhỏ hơn) */}
+                                {/* Phần Combo giữ nguyên */}
                                 {item.combos.length > 0 && (
                                     <div className="combo-list-in-cart">
-                                        <div className="combo-arrow-up"></div> {/* Mũi tên trang trí */}
+                                        <div className="combo-arrow-up"></div>
                                         {item.combos.map(combo => (
                                             <div className="combo-row" key={combo.id}>
-                                                <div className="combo-check-placeholder"></div> {/* Khoảng trắng để thẳng hàng */}
-                                                
+                                                <div className="combo-check-placeholder"></div>
                                                 <div className="combo-info">
                                                     <span className="combo-connector">↳ Mua kèm:</span>
                                                     <img src={combo.img} alt={combo.name} />
                                                     <span className="combo-name">{combo.name}</span>
                                                 </div>
-
                                                 <div className="combo-price">{formatPrice(combo.price)} ₫</div>
-                                                
-                                                {/* Số lượng phụ kiện theo số lượng máy */}
                                                 <div className="combo-qty">x {item.quantity}</div>
-                                                
                                                 <div className="combo-total">{formatPrice(combo.price * item.quantity)} ₫</div>
                                                 <div className="combo-action"></div>
                                             </div>
@@ -211,7 +227,13 @@ const Cart = () => {
                         </div>
                         <div className="vat-text">(Đã bao gồm VAT)</div>
 
-                        <button className="btn-checkout">MUA HÀNG ({checkedIds.length})</button>
+                        {/* --- NÚT MUA HÀNG ĐÃ ĐƯỢC GẮN SỰ KIỆN --- */}
+                        <button 
+                            className="btn-checkout" 
+                            onClick={handleCheckout}
+                        >
+                            MUA HÀNG ({checkedIds.length})
+                        </button>
                     </div>
                 </div>
             )}

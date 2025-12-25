@@ -23,4 +23,6 @@ public class Cart {
     private Product product;
 
     private int quantity;
+    @Column(name = "is_combo")
+    private boolean isCombo = false;
 }

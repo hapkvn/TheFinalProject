@@ -29,17 +29,22 @@ const Detail = () => {
 
     // --- HÀM 1: MUA NGAY (Thêm -> Chuyển sang Giỏ hàng) ---
     const handleBuyNow = async () => {
-        if (!username) { /* ...giữ nguyên logic check login... */ }
+        if (!username) {
+            alert("Vui lòng đăng nhập để mua hàng!");
+            history.push("/login");
+            return;
+        }
 
         // Gọi API thêm vào giỏ
         const success = await window.CartService.addToCart(username, product.id, 1);
         
         if (success) {
-            // SỬA Ở ĐÂY: Chuyển thẳng sang trang thanh toán
-            if (history) history.push("/checkout");
-            else window.location.href = "#/checkout";
+            // --- SỬA Ở ĐÂY ---
+            // Thay vì push("/checkout"), hãy đưa về "/cart"
+            if (history) history.push("/cart"); 
+            else window.location.href = "#/cart";
         } else {
-            alert("Lỗi khi mua hàng!");
+            alert("Lỗi khi thêm vào giỏ hàng!");
         }
     };
 
@@ -60,17 +65,18 @@ const Detail = () => {
     };
 
     // --- HÀM 3: MUA COMBO ---
+   // Trong file Detail.js
     const handleBuyCombo = async () => {
-        if (!username) {
-            alert("Vui lòng đăng nhập!");
-            return;
+        if (!username) { /* check login */ return; }
+
+        // Gọi API thêm vào giỏ với cờ isCombo = true
+        // KHÔNG CẦN add thêm chuột nữa, vì ta coi chuột là phần đi kèm của Laptop này
+        const success = await window.CartService.addToCart(username, product.id, 1, true); // <--- Thêm true vào tham số cuối (bạn cần sửa CartService.js ở client nữa)
+        
+        if (success) {
+            alert("Đã thêm Combo vào giỏ!");
+            history.push("/cart");
         }
-        await window.CartService.addToCart(username, product.id, 1);
-        for (const item of selectedCombos) {
-            await window.CartService.addToCart(username, item.id, 1);
-        }
-        if (history) history.push("/checkout");
-        else window.location.href = "#/checkout";
     };
 
     // Logic tính toán hiển thị

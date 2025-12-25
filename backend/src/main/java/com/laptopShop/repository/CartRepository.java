@@ -17,4 +17,5 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     // --- THÊM DÒNG NÀY ---
     // Tìm xem User A đã có Product B trong giỏ chưa?
     Cart findByUserAndProduct(User user, Product product);
+    Cart findByUserAndProductAndIsCombo(User user, Product product, boolean isCombo);
 }
