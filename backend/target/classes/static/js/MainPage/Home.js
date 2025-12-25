@@ -37,21 +37,21 @@ const Home = () => {
                     <div className="news-header">TIN MỚI NHẤT</div>
                     <div className="news-list">
                         <div className="news-item highlight">
-                            <img src="https://via.placeholder.com/150" className="news-thumb" />
+                            <img src="img/gg.jpg" className="news-thumb" />
                             <div className="news-info">
                                 <span className="news-title">GIGABYTE CHRISTMAS & NEW YEAR: Ưu đãi cực khủng</span>
                                 <span className="news-meta">13/12/2025 - 135 views</span>
                             </div>
                         </div>
                         <div className="news-item">
-                            <img src="https://via.placeholder.com/150" className="news-thumb" />
+                            <img src="img/noel.jpg" className="news-thumb" />
                             <div className="news-info">
                                 <span className="news-title">THÔNG BÁO LỊCH LÀM VIỆC NGÀY LỄ</span>
                                 <span className="news-meta">10/12/2025 - 85 views</span>
                             </div>
                         </div>
                         <div className="news-item">
-                            <img src="https://via.placeholder.com/150" className="news-thumb" />
+                            <img src="img/15.jpg" className="news-thumb" />
                             <div className="news-info">
                                 <span className="news-title">Top 5 laptop làm quà Giáng Sinh</span>
                                 <span className="news-meta">04/12/2025 - 125 views</span>
