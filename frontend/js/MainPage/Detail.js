@@ -67,15 +67,30 @@ const Detail = () => {
     // --- HÀM 3: MUA COMBO ---
    // Trong file Detail.js
     const handleBuyCombo = async () => {
-        if (!username) { /* check login */ return; }
+        if (!username) { 
+            alert("Vui lòng đăng nhập để mua hàng!"); 
+            history.push("/login"); 
+            return; 
+        }
 
-        // Gọi API thêm vào giỏ với cờ isCombo = true
-        // KHÔNG CẦN add thêm chuột nữa, vì ta coi chuột là phần đi kèm của Laptop này
-        const success = await window.CartService.addToCart(username, product.id, 1, true); // <--- Thêm true vào tham số cuối (bạn cần sửa CartService.js ở client nữa)
+        // 1. Thêm Laptop chính (isCombo = true)
+        let success = await window.CartService.addToCart(username, product.id, 1, true);
         
+        // 2. Thêm các phụ kiện đã chọn trong danh sách selectedCombos
+        if (success && selectedCombos.length > 0) {
+            for (const item of selectedCombos) {
+                // Gọi API thêm từng món phụ kiện, cũng đánh dấu là Combo để sang kia nó gộp vào
+                await window.CartService.addToCart(username, item.id, 1, true);
+            }
+        }
+
         if (success) {
-            alert("Đã thêm Combo vào giỏ!");
-            history.push("/cart");
+            alert(`Đã thêm Combo gồm Máy + ${selectedCombos.length} món phụ kiện vào giỏ!`);
+            // Chuyển hướng
+            if (history) history.push("/cart"); 
+            else window.location.href = "#/cart";
+        } else {
+            alert("Lỗi khi thêm sản phẩm vào giỏ!");
         }
     };
 

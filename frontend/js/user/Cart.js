@@ -10,46 +10,87 @@ const Cart = () => {
     const userStored = JSON.parse(localStorage.getItem("user"));
     const username = userStored ? userStored.username : null;
 
-    // Trong Cart.js, đoạn useEffect
-    // File: js/user/Cart.js
-
-    // ... (code cũ)
-
-    // 2. GỌI API LẤY GIỎ HÀNG KHI VÀO TRANG
+  
+    // 2. GỌI API VÀ GOM NHÓM DỮ LIỆU
     useEffect(() => {
         if (username) {
-            // --- SỬA LẠI DÒNG NÀY (Bỏ dấu 3 chấm đi) ---
             fetch(`http://localhost:8088/api/cart?username=${username}`)
                 .then(res => res.json())
                 .then(data => {
-                    const mappedData = data.map(item => {
-                        let cartItem = {
-                            id: item.id,
-                            productId: item.product.id,
-                            name: item.product.name,
-                            price: item.product.price,
-                            img: item.product.img,
-                            quantity: item.quantity,
-                            combos: [] 
-                        };
+                    console.log("Dữ liệu gốc từ Server:", data); // Check log
 
-                        // Logic xử lý combo
-                        if (item.combo) { 
-                            cartItem.combos.push({
-                                id: 999,
-                                name: "Quà tặng: Chuột Logitech G102",
-                                price: 0, 
-                                img: "https://product.hstatic.net/1000026716/product/logitech-g102-gen2-lightsync-black-01_1669c7f66a2c476785050302eb233941_master.jpg"
-                            });
+                    // BƯỚC 1: PHÂN LOẠI
+                    let mainItems = [];      // Chứa Laptop/PC (Cả lẻ và Combo)
+                    let accessoryItems = []; // Chứa Phụ kiện Combo (Để gộp vào Laptop)
+
+                    data.forEach(item => {
+                        // Chuẩn hóa cờ isCombo (Backend có thể trả về nhiều kiểu tên)
+                        const isComboItem = item.isCombo || item.combo || (item.is_combo === 1) || (item.is_combo === true);
+                        
+                        // Xác định đâu là Phụ kiện dựa vào ID (theo data của bạn ID > 100 là phụ kiện)
+                        // Hoặc bạn có thể check theo category nếu backend có trả về
+                        const isAccessory = item.product.id > 100; 
+
+                        if (isComboItem && isAccessory) {
+                            // Đây là Phụ kiện của Combo -> Bỏ vào kho phụ kiện
+                            accessoryItems.push(item);
+                        } else {
+                            // Đây là Laptop (Lẻ hoặc Combo) hoặc Phụ kiện mua lẻ -> Giữ làm dòng chính
+                            // Tạo sẵn mảng combos rỗng cho nó
+                            let newItem = {
+                                ...item,
+                                productId: item.product.id,
+                                name: item.product.name,
+                                price: item.product.price,
+                                img: item.product.img,
+                                combos: [], // Chuẩn bị chỗ chứa
+                                isCombo: isComboItem // Lưu trạng thái
+                            };
+                            mainItems.push(newItem);
                         }
-                        return cartItem;
                     });
-                    setCartItems(mappedData);
+
+                    // BƯỚC 2: GÉP PHỤ KIỆN VÀO LAPTOP
+                    // Logic: Tìm Laptop Combo đầu tiên và nhét tất cả phụ kiện combo vào đó
+                    if (accessoryItems.length > 0) {
+                        // Tìm sản phẩm chính là Combo (Ví dụ: Laptop Dell)
+                        const targetMain = mainItems.find(i => i.isCombo && i.productId <= 100);
+
+                        if (targetMain) {
+                            // Map lại phụ kiện cho đẹp đội hình
+                            const formattedAccessories = accessoryItems.map(acc => ({
+                                id: acc.id, // Giữ ID cart để sau này xóa nếu cần
+                                name: acc.product.name,
+                                price: acc.product.price,
+                                img: acc.product.img,
+                                quantity: acc.quantity
+                            }));
+
+                            // Nhét vào bụng Laptop
+                            targetMain.combos = formattedAccessories;
+                        } else {
+                            // Trường hợp hiếm: Mua phụ kiện combo mà không mua Laptop
+                            // Thì đành trả nó về danh sách chính để nó hiện ra
+                            const orphans = accessoryItems.map(item => ({
+                                ...item,
+                                productId: item.product.id,
+                                name: item.product.name,
+                                price: item.product.price,
+                                img: item.product.img,
+                                combos: []
+                            }));
+                            mainItems = [...mainItems, ...orphans];
+                        }
+                    }
+
+                    // BƯỚC 3: CẬP NHẬT STATE
+                    // Lúc này mainItems đã gọn gàng (Laptop đã chứa phụ kiện bên trong)
+                    setCartItems(mainItems);
                 })
                 .catch(err => console.error("Lỗi tải giỏ hàng:", err));
         }
     }, [username]);
-    // --- CÁC HÀM XỬ LÝ CŨ (Giữ nguyên) ---
+
     const updateQuantity = (id, delta) => {
         const newCart = cartItems.map(item => {
             if (item.id === id) {
@@ -95,8 +136,7 @@ const Cart = () => {
         }
     };
 
-    // --- HÀM MỚI: XỬ LÝ MUA HÀNG ---
-    // --- HÀM MỚI: XỬ LÝ MUA HÀNG ---
+
     const handleCheckout = () => {
         if (!username) {
             alert("Vui lòng đăng nhập để mua hàng!");
@@ -109,14 +149,11 @@ const Cart = () => {
             return;
         }
 
-        // --- QUAN TRỌNG: Lưu danh sách ID đã chọn vào bộ nhớ tạm ---
         localStorage.setItem("checkoutIds", JSON.stringify(checkedIds));
 
-        // Chuyển hướng
         history.push("/checkout");
     };
 
-    // --- TÍNH TOÁN TỔNG TIỀN ---
     const totalAmount = cartItems.reduce((sum, item) => {
         if (checkedIds.includes(item.id)) {
             const mainTotal = item.price * item.quantity;
@@ -139,7 +176,6 @@ const Cart = () => {
                 </div>
             ) : (
                 <div className="cart-content">
-                    {/* CỘT TRÁI (Giữ nguyên nội dung hiển thị) */}
                     <div className="cart-list">
                         <div className="cart-header-row">
                             <label className="checkbox-wrap">
