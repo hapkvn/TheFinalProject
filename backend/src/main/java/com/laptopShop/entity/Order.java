@@ -14,31 +14,25 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Liên kết với User (Ai mua đơn này?)
+    // --- QUAN TRỌNG: LIÊN KẾT USER ---
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id") // Map với cột user_id trong SQL
     private User user;
+    // ---------------------------------
 
     private String fullname;
     private String phone;
     private String address;
-    private String status; // PENDING, PAID, Unpaid, DELIVERED...
+    private String status;
 
     @Column(name = "total_money")
     private Double totalMoney;
 
-    // Cột lưu phương thức thanh toán (COD / BANKING)
-    // Nếu trong Database chưa có cột này, bạn cần chạy lệnh SQL bổ sung bên dưới
     @Column(name = "payment_method")
     private String paymentMethod;
 
-    // --- CỘT QUAN TRỌNG ĐỂ SẮP XẾP ---
     @Column(name = "created_at")
     private Date createdAt;
-
-    // Liên kết ngược lại OrderDetail để lấy danh sách sản phẩm khi xem lịch sử
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderDetail> orderDetails;
 
     @PrePersist
     protected void onCreate() {

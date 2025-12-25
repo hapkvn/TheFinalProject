@@ -1,8 +1,10 @@
 package com.laptopShop.facade;
 
 import com.laptopShop.entity.*;
+import com.laptopShop.factory.PaymentFactory;
 import com.laptopShop.repository.*;
 import com.laptopShop.service.CartService;
+import com.laptopShop.service.payment.IPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,31 +17,48 @@ public class CheckoutFacade {
     @Autowired private OrderDetailRepository orderDetailRepo;
     @Autowired private UserRepository userRepo;
     @Autowired private ProductRepository productRepo;
+    @Autowired private PaymentFactory paymentFactory;
 
-    @Transactional // Rất quan trọng: Mọi thứ thành công hết hoặc thất bại hết
-    public void checkout(String username, String address, String phone) {
-        // 1. Lấy user và giỏ hàng
-        User user = userRepo.findByUsername(username).orElseThrow();
+    @Transactional
+    public void checkout(String username, String address, String phone, String paymentMethod) {
+
+        // 1. Tìm User (Đảm bảo user tồn tại)
+        User user = userRepo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User không tồn tại"));
+
+        // 2. Lấy Giỏ hàng
         List<Cart> cartItems = cartService.getMyCart(username);
-
         if(cartItems.isEmpty()) throw new RuntimeException("Giỏ hàng trống!");
 
-        // 2. Tạo đơn hàng (Order)
+        // 3. TẠO ORDER
         Order order = new Order();
-        order.setFullname(user.getFullName());
+
+        // --- 👇 DÒNG NÀY RẤT QUAN TRỌNG (SỬA LỖI USER_ID NULL) ---
+        order.setUser(user);
+        // ---------------------------------------------------------
+
+        order.setFullname(user.getFullName()); // Lưu tên người nhận
         order.setAddress(address);
         order.setPhone(phone);
-        order.setStatus("PENDING");
+        order.setPaymentMethod(paymentMethod);
 
-        // Tính tổng tiền Java 8 Stream
+        // Tính tổng tiền
         double total = cartItems.stream()
                 .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
                 .sum();
         order.setTotalMoney(total);
 
+        // Xử lý thanh toán (Factory Pattern)
+        IPaymentService paymentService = paymentFactory.getService(paymentMethod);
+        if (paymentService == null) {
+            throw new RuntimeException("Phương thức thanh toán không hỗ trợ: " + paymentMethod);
+        }
+        paymentService.processPayment(order);
+
+        // 4. LƯU ORDER (Lúc này user_id sẽ được tự động lấy từ user bên trên)
         Order savedOrder = orderRepo.save(order);
 
-        // 3. Lưu chi tiết đơn hàng (OrderDetail)
+        // 5. Lưu chi tiết đơn hàng
         for (Cart item : cartItems) {
             OrderDetail detail = new OrderDetail();
             detail.setOrder(savedOrder);
@@ -50,21 +69,17 @@ public class CheckoutFacade {
 
             orderDetailRepo.save(detail);
 
-            // --- THÊM ĐOẠN NÀY ĐỂ TRỪ KHO ---
+            // Trừ kho
             Product product = item.getProduct();
             int newStock = product.getStock() - item.getQuantity();
-
-            // Đảm bảo không bị âm kho (Logic an toàn)
             if (newStock < 0) {
                 throw new RuntimeException("Sản phẩm " + product.getName() + " đã hết hàng!");
             }
-
             product.setStock(newStock);
-            // productRepo chưa được khai báo ở trên thì bạn phải @Autowired thêm vào nhé
             productRepo.save(product);
         }
 
-        // 4. Xóa giỏ hàng
+        // 6. Xóa giỏ hàng
         cartService.clearCart(username);
     }
 }

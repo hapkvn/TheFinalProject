@@ -1,0 +1,355 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    background-color: #ddeefa;
+}
+
+
+.wrapper {
+    width: auto;
+    margin: auto;
+    flex-direction: column;
+    display: flex;
+    min-height: 100vh;
+}
+.app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;      
+}
+
+.main-container{
+    flex: 1; /* Quan trọng: Đẩy Footer xuống đáy */
+    width: 100%;
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    gap: 20px;
+}
+
+
+.header {    
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;    
+    font-size: 20px;
+    display: flex;
+    
+}
+
+
+.main-top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 40px;
+    padding-top: 10px;
+    background-color: #ffffff;    
+    font-size: 20px;  
+    gap: 40px; 
+}
+.main-top a{
+    text-decoration: none;
+}
+
+.topRight {
+    display: flex;          /* Xếp Liên hệ và Đăng nhập nằm ngang */
+    align-items: center;    /* Căn giữa dọc */
+    gap: 20px;              /* Khoảng cách giữa Liên hệ và Login */
+    margin-left: 20px;      /* Cách thanh tìm kiếm ra một chút */
+}
+
+/* 2. Class Liên hệ: Xóa margin cũ đi */
+.contact {
+    margin: 0; /* Quan trọng: Xóa cái 630px cũ đi */
+}
+
+.contact a {
+    color: #007bff;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* 3. Class Account (Đăng nhập) */
+.account a {
+    color: #333;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+/* --- CHỈNH LẠI THANH TÌM KIẾM CHO ĐẸP (ICON Ở TRONG) --- */
+
+.search-box {
+    position: relative; /* Để icon kính lúp bay vào trong */
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 10px 15px;
+    padding-right: 40px; /* Chừa chỗ cho icon */
+    width: 250px;        /* Độ rộng thanh tìm kiếm */
+    font-size: 16px;
+    border-radius: 20px; /* Bo tròn */
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.glass {
+    position: absolute;  /* Bay lên trên input */
+    right: 15px;         /* Nằm sát phải */
+    color: #555;
+    cursor: pointer;
+}
+
+.logo{
+    font-size:30px ;
+    align-items: center;
+    font-weight: bold;
+}
+.logo a{
+    color:#3597ff;
+}
+
+.nav-links{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+
+.nav-links a{
+    color:black;
+    font-weight: bold;
+}
+
+
+
+/* Khung bao ngoài cùng */
+.menu {
+    width: 250px;
+    margin: -67px 35px; 
+}
+
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px; /* Tăng padding cho cao bằng Header chính nếu cần */
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    
+    background-color: #124195;
+    text-transform: uppercase;
+}
+
+/* PHẦN DANH SÁCH (Màu trắng) */
+.menu-danhmuc {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #ffffff;
+    
+    /* Viền bao quanh hộp danh sách */
+    border: 1px solid #ddd;
+    border-top: none; /* Bỏ viền trên để nó liền mạch với header xanh */
+    
+    /* Chỉ bo tròn 2 góc dưới */
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1); /* Đổ bóng nhẹ cho nổi */
+}
+
+/* Từng dòng trong menu */
+.menu-danhmuc li {
+    padding: 12px 20px;
+    border-bottom: 1px solid #eeeeee;
+    transition: all 0.3s;
+}
+
+/* Xóa gạch chân dòng cuối cùng cho đẹp */
+.menu-danhmuc li:last-child {
+    border-bottom: none;
+}
+
+/* Hiệu ứng khi di chuột */
+.menu-danhmuc li:hover {
+    background-color: #f0f8ff; /* Màu xanh nhạt khi hover */
+    padding-left: 25px; /* Hiệu ứng đẩy chữ sang phải một chút */
+}
+
+/* Link bên trong li */
+.menu-danhmuc li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    display: block; /* Để bấm được vào cả vùng trống */
+    width: 100%;
+}
+
+.footer {
+    background: #ffffff;
+    color: rgb(1, 141, 255);
+    padding: 20px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* --- PHẦN MỚI: MENU TÀI KHOẢN (Dán vào cuối file CSS) --- */
+
+/* 1. Vùng bao quanh tên người dùng (Để căn vị trí menu con) */
+.account-wrapper {
+    position: relative; /* Quan trọng: để menu con bám theo cái này */
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* 2. Style cho cái tên hiển thị trên thanh Header */
+.user-name {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa icon và tên */
+    color: #000000; /* Màu chữ trắng giống header */
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 20px; /* Bo tròn nhẹ */
+    transition: background 0.2s;
+    user-select: none; /* Không cho bôi đen chữ */
+}
+
+.user-name:hover {
+    background-color: rgba(255, 255, 255, 0.15); /* Hiệu ứng sáng lên khi di chuột */
+}
+
+/* 3. Khung Menu thả xuống (Mặc định React ẩn, khi hiện sẽ dùng style này) */
+.user-dropdown {
+    position: absolute;
+    top: 120%; /* Đẩy xuống dưới tên một chút */
+    right: 0;   /* Căn phải thẳng hàng với tên */
+    width: 200px; /* Độ rộng menu */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Đổ bóng đẹp */
+    z-index: 1000; /* Đè lên mọi thứ khác */
+    overflow: hidden;
+    animation: fadeIn 0.2s ease-in-out; /* Hiệu ứng hiện ra từ từ */
+}
+
+/* Mũi tên nhọn chỉ lên trên (Trang trí cho đẹp) */
+.user-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    right: 20px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    transform: rotate(45deg);
+}
+
+/* 4. Các mục bên trong menu (Hồ sơ, Đơn hàng...) */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #333 !important; /* Màu chữ đen (ghi đè màu trắng của header) */
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none; /* Bỏ gạch chân mục cuối */
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa; /* Màu nền xám nhạt khi di chuột */
+    color: #007bff !important; /* Chữ chuyển xanh */
+    padding-left: 25px; /* Hiệu ứng đẩy chữ sang phải chút xíu */
+}
+
+.dropdown-item i {
+    width: 25px; /* Căn thẳng hàng icon */
+    text-align: center;
+    margin-right: 5px;
+    color: #666;
+}
+
+/* 5. Nút đăng xuất (Màu đỏ cho nổi bật) */
+.logout-btn {
+    color: #dc3545 !important;
+    font-weight: 500;
+}
+.logout-btn:hover {
+    background-color: #fff5f5;
+    color: #dc3545 !important;
+}
+
+/* Hiệu ứng hiện menu mượt mà */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- STYLE CHO TRANG LỊCH SỬ ĐƠN HÀNG --- */
+.order-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-left: 5px solid #124195;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.order-date {
+    margin-left: 15px;
+    color: #888;
+    font-size: 14px;
+}
+
+.order-status {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.status-pending { color: #ff8a00; }
+.status-success { color: #28a745; }
+
+.order-info-line {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.order-footer {
+    text-align: right;
+    margin-top: 15px;
+    font-size: 18px;
+    color: #333;
+}
+
+.order-total {
+    color: #d70018;
+    font-size: 20px;
+}

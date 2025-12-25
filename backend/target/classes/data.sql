@@ -14,14 +14,14 @@ CREATE TABLE IF NOT EXISTS users (
 -- 2. Bảng Orders (Phải tạo trước Order Details)
 CREATE TABLE orders (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    user_id BIGINT NOT NULL,
-    fullname VARCHAR(255),
+    user_id BIGINT NOT NULL,          
+    fullname VARCHAR(255),            
     phone VARCHAR(20),
     address VARCHAR(500),
-    total_money DECIMAL(15, 2),
-    status VARCHAR(50) DEFAULT 'PENDING',
+    total_money DECIMAL(15, 2),       
+    status VARCHAR(50) DEFAULT 'PENDING', 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
+    
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -31,7 +31,7 @@ CREATE TABLE products (
     name VARCHAR(255) NOT NULL,
     price DECIMAL(15, 2) NOT NULL,
     img VARCHAR(255),
-    cat VARCHAR(50),
+    cat VARCHAR(50), 
     status VARCHAR(50) DEFAULT 'Sẵn hàng',
     stock INT DEFAULT 10 -- Cột số lượng tồn kho
 );
@@ -39,11 +39,11 @@ CREATE TABLE products (
 -- 4. Bảng Carts
 CREATE TABLE carts (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    user_id BIGINT NOT NULL,
-    product_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,          
+    product_id BIGINT NOT NULL,       
     quantity INT DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
+    
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
@@ -51,12 +51,12 @@ CREATE TABLE carts (
 -- 5. Bảng Order Details
 CREATE TABLE order_details (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    order_id BIGINT NOT NULL,
-    product_id BIGINT NOT NULL,
-    price DECIMAL(15, 2),
+    order_id BIGINT NOT NULL,         
+    product_id BIGINT NOT NULL,       
+    price DECIMAL(15, 2),             
     quantity INT,
     total_price DECIMAL(15, 2),
-
+    
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
@@ -70,9 +70,9 @@ INSERT INTO users (username, password, full_name, role) VALUES
 ('sales', '123456', 'Nhân Viên Bán Hàng', 'STAFF');
 
 -- 2. Insert Products (Dữ liệu chuẩn của bạn)
-INSERT INTO products (id, name, price, img, cat, stock) VALUES
+INSERT INTO products (id, name, price, img, cat, stock) VALUES 
 -- LAPTOP (ID 1 -> 32)
-(1, 'Thinkpad E14 Gen 7 21SX002QVA Ultra 5 225U', 20490000, 'img/892x556_1762486949.webp', 'office', 50),
+(1, 'Thinkpad E14 Gen 7 21SX002QVA Ultra 5 225U', 20490000, 'img/1.jpg', 'office', 50),
 (2, 'Thinkpad E16 Gen 3 21SR002JVA Ultra 5 225U', 21290000, 'img/thinkpad-e16.webp', 'office', 30),
 (3, 'Lenovo Lecoo Pro 14 2025 Ryzen 7 8845H', 16790000, 'img/lecoo-pro-14.webp', 'gaming', 15),
 (4, 'ASUS TUF Gaming F16 FX607VJ-RL034W Core i7', 29190000, 'img/asus-tuf-f16.webp', 'gaming', 20),
@@ -121,6 +121,8 @@ INSERT INTO products (id, name, price, img, cat, stock) VALUES
 
 -- 3. Insert thử vào giỏ hàng
 INSERT INTO carts (user_id, product_id, quantity) VALUES (1, 1, 2);
+ALTER TABLE carts ADD COLUMN is_combo BOOLEAN DEFAULT FALSE;
 
 -- Kiểm tra kết quả
 SELECT * FROM products;
+SELECT * FROM users;
