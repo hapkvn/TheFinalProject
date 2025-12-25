@@ -11,30 +11,24 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/cart")
-@CrossOrigin(origins = "*") // Cho phép React gọi qua
+@CrossOrigin(origins = "*")
 public class CartController {
 
     @Autowired
     private CartService cartService;
 
-    // 1. Lấy danh sách giỏ hàng
-    // GET: http://localhost:8088/api/cart?username=admin
     @GetMapping
     public ResponseEntity<?> getCart(@RequestParam String username) {
         List<Cart> cartItems = cartService.getMyCart(username);
         return ResponseEntity.ok(cartItems);
     }
 
-    // 2. Thêm vào giỏ hàng
-    // POST: http://localhost:8088/api/cart/add
-    // Body: { "username": "admin", "productId": 1, "quantity": 1 }
     @PostMapping("/add")
     public ResponseEntity<?> addToCart(@RequestBody Map<String, Object> payload) {
         String username = (String) payload.get("username");
         Long productId = Long.valueOf(payload.get("productId").toString());
         int quantity = (int) payload.get("quantity");
 
-        // --- Lấy tham số isCombo (nếu không gửi thì mặc định là false) ---
         boolean isCombo = false;
         if (payload.containsKey("isCombo")) {
             isCombo = (boolean) payload.get("isCombo");
@@ -44,7 +38,6 @@ public class CartController {
         return ResponseEntity.ok(Map.of("message", "Thêm thành công"));
     }
 
-    // 3. Xóa giỏ hàng (Sau này làm thêm xóa từng món)
     @DeleteMapping("/clear")
     public ResponseEntity<?> clearCart(@RequestParam String username) {
         cartService.clearCart(username);

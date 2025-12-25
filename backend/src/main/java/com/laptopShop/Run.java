@@ -3,7 +3,6 @@ package com.laptopShop; // Đặt ở thư mục gốc của dự án
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-// @SpringBootApplication: Đây là lệnh bảo Java: "Hãy khởi động Server và đi tìm tất cả Controller cho tôi"
 @SpringBootApplication
 public class Run {
 

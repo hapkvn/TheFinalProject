@@ -3,31 +3,27 @@ const { useState, useEffect } = React;
 
 const Detail = () => {
     const { id } = useParams();
-    // Xử lý history để chuyển trang (hỗ trợ cả Router v5 và v6/Hash)
+
     const history = ReactRouterDOM.useHistory ? ReactRouterDOM.useHistory() : null;
 
-    // 1. LẤY USERNAME TỪ LOCALSTORAGE
     const userStored = JSON.parse(localStorage.getItem("user"));
     const username = userStored ? userStored.username : null;
-
-    // 2. LẤY SẢN PHẨM TỪ DATA
+  A
     const allItems = [...(window.DATA_PRODUCTS || []), ...(window.DATA_ACCESSORIES || [])];
     const product = allItems.find(p => p.id == id);
-    
-    // State chọn combo
+
     const [selectedCombos, setSelectedCombos] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Tự động gợi ý combo nếu có
+
     useEffect(() => {
         if (window.DATA_ACCESSORIES && window.DATA_ACCESSORIES.length > 0) {
-            // Lọc bỏ chính nó ra khỏi danh sách gợi ý (nếu đang xem phụ kiện)
             const suggestion = window.DATA_ACCESSORIES.filter(i => i.id != id).slice(0, 2);
             setSelectedCombos(suggestion);
         }
     }, [id]);
 
-    // --- HÀM 1: MUA NGAY (Thêm -> Chuyển sang Giỏ hàng) ---
+
     const handleBuyNow = async () => {
         if (!username) {
             alert("Vui lòng đăng nhập để mua hàng!");
@@ -35,12 +31,11 @@ const Detail = () => {
             return;
         }
 
-        // Gọi API thêm vào giỏ
+
         const success = await window.CartService.addToCart(username, product.id, 1);
         
         if (success) {
-            // --- SỬA Ở ĐÂY ---
-            // Thay vì push("/checkout"), hãy đưa về "/cart"
+
             if (history) history.push("/cart"); 
             else window.location.href = "#/cart";
         } else {
@@ -48,24 +43,22 @@ const Detail = () => {
         }
     };
 
-    // --- HÀM 2: THÊM VÀO GIỎ (Thêm -> Ở lại trang hiện tại) ---
     const handleAddToCart = async () => {
         if (!username) {
             alert("Vui lòng đăng nhập để thêm vào giỏ!");
             return;
         }
-        // Hiệu ứng rung nhẹ hoặc thông báo
+
         const success = await window.CartService.addToCart(username, product.id, 1);
         if (success) {
             alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
-            // Có thể reload nhẹ header nếu muốn cập nhật số lượng
+
         } else {
             alert("Lỗi kết nối server!");
         }
     };
 
-    // --- HÀM 3: MUA COMBO ---
-   // Trong file Detail.js
+
     const handleBuyCombo = async () => {
         if (!username) { 
             alert("Vui lòng đăng nhập để mua hàng!"); 
@@ -73,20 +66,20 @@ const Detail = () => {
             return; 
         }
 
-        // 1. Thêm Laptop chính (isCombo = true)
+
         let success = await window.CartService.addToCart(username, product.id, 1, true);
         
-        // 2. Thêm các phụ kiện đã chọn trong danh sách selectedCombos
+
         if (success && selectedCombos.length > 0) {
             for (const item of selectedCombos) {
-                // Gọi API thêm từng món phụ kiện, cũng đánh dấu là Combo để sang kia nó gộp vào
+
                 await window.CartService.addToCart(username, item.id, 1, true);
             }
         }
 
         if (success) {
             alert(`Đã thêm Combo gồm Máy + ${selectedCombos.length} món phụ kiện vào giỏ!`);
-            // Chuyển hướng
+
             if (history) history.push("/cart"); 
             else window.location.href = "#/cart";
         } else {
@@ -94,7 +87,7 @@ const Detail = () => {
         }
     };
 
-    // Logic tính toán hiển thị
+
     if (!product) return <div style={{padding:20}}>Không tìm thấy sản phẩm</div>;
 
     const specLabels = { cpu: "CPU", ram: "RAM", storage: "Ổ cứng", display: "Màn hình", gpu: "VGA" };
@@ -156,7 +149,7 @@ const Detail = () => {
                         </div>
                     </div>
 
-                    {/* --- KHỐI NÚT MUA (ĐÃ SỬA) --- */}
+
                     <div className="action-buttons">
                         
                         {/* Dòng 1: Mua ngay + Thêm vào giỏ */}
@@ -175,7 +168,7 @@ const Detail = () => {
                         </div>
                     </div>
 
-                    {/* --- PHẦN MUA COMBO --- */}
+
                     <div className="combo-wrapper">
                         <h3 className="combo-title">Ưu đãi mua kèm</h3>
                         <div className="combo-list">
@@ -203,7 +196,7 @@ const Detail = () => {
                 </div>
             </div>
 
-            {/* --- MODAL CHỌN COMBO --- */}
+
             {isModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal-content">

@@ -12,8 +12,7 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Dùng User Object thay vì chỉ lưu string username
-    // Khi query ta sẽ tìm theo username của User này
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

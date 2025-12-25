@@ -5,7 +5,6 @@ const Home = () => {
     const newProducts = allProducts.slice(0, 4);
     const bestSellers = allProducts.slice(4, 8);
 
-    // Component thẻ sản phẩm (Giữ nguyên class product-card để ăn theo CSS product)
     const ProductCard = ({ product }) => (
         <div className="product-card">
             <div className="img-container">
@@ -64,7 +63,7 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* --- PHẦN 2: SẢN PHẨM MỚI --- */}
+
             <div className="home-section">
                 <div className="section-head">
                     <h2 className="sec-title">

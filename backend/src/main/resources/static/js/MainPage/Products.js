@@ -4,21 +4,18 @@ const { Link, useLocation } = ReactRouterDOM;
 const Products = () => {
     const location = useLocation();
 
-    // --- 1. GỘP DỮ LIỆU (Laptop + Phụ kiện) ---
-    // Dùng toán tử || [] để tránh lỗi nếu chưa tạo file phụ kiện
+
     const allItems = [
         ...(window.DATA_PRODUCTS || []), 
         ...(window.DATA_ACCESSORIES || [])
     ];
 
-    // State lưu danh sách sản phẩm đang hiển thị
     const [products, setProducts] = useState(allItems);
-    // State lưu danh mục đang chọn (để tô màu nút bấm)
+
     const [activeCat, setActiveCat] = useState("all");
-    // State lưu kiểu sắp xếp
+
     const [sortType, setSortType] = useState("default");
 
-    // --- 2. XỬ LÝ TÌM KIẾM TỪ URL & LỌC BAN ĐẦU ---
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const search = params.get("search");
@@ -41,9 +38,9 @@ const Products = () => {
         }
 
         setProducts(result);
-    }, [location.search]); // Chạy lại khi URL thay đổi
+    }, [location.search]);
 
-    // --- 3. HÀM LỌC KHI BẤM NÚT TRÊN MÀN HÌNH ---
+
     const handleFilter = (category) => {
         setActiveCat(category);
         let result = [...allItems];
@@ -52,29 +49,26 @@ const Products = () => {
             result = result.filter(p => p.cat === category);
         }
         
-        // Reset lại sắp xếp khi chuyển danh mục
+
         setSortType("default");
         setProducts(result);
     };
 
-    // --- 4. HÀM SẮP XẾP GIÁ ---
+
     const handleSort = (e) => {
         const type = e.target.value;
         setSortType(type);
 
         let sorted = [...products];
         if (type === "asc") {
-            // Giá thấp đến cao (Chuyển chuỗi "20.000.000" thành số để so sánh)
             sorted.sort((a, b) => 
                 parseInt(a.price.replace(/\./g, '')) - parseInt(b.price.replace(/\./g, ''))
             );
         } else if (type === "desc") {
-            // Giá cao đến thấp
             sorted.sort((a, b) => 
                 parseInt(b.price.replace(/\./g, '')) - parseInt(a.price.replace(/\./g, ''))
             );
         } else {
-            // Mặc định (Sắp xếp theo ID hoặc ngẫu nhiên tùy data gốc)
             sorted.sort((a, b) => a.id - b.id);
         }
         setProducts(sorted);
@@ -83,13 +77,13 @@ const Products = () => {
     return (
         <div className="product-page-container">
             
-            {/* --- THANH CÔNG CỤ (LỌC & SẮP XẾP) --- */}
+
             <div className="toolbar" style={{display: 'flex', flexDirection: 'column', gap: '15px'}}>
                 
-                {/* Dòng 1: Các nút chọn danh mục */}
+
                 
 
-                {/* Dòng 2: Sắp xếp */}
+
                 <div className="sort-box" style={{alignSelf: 'flex-end'}}>
                     Sắp xếp: 
                     <select className="sort-select" onChange={handleSort} value={sortType}>
@@ -100,7 +94,7 @@ const Products = () => {
                 </div>
             </div>
 
-            {/* --- LƯỚI SẢN PHẨM --- */}
+
             <div className="product-grid">
                 {products.length > 0 ? products.map(p => (
                     <div className="product-card" key={p.id}>

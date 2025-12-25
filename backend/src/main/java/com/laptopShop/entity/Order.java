@@ -14,9 +14,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // --- QUAN TRỌNG: LIÊN KẾT USER ---
+
     @ManyToOne
-    @JoinColumn(name = "user_id") // Map với cột user_id trong SQL
+    @JoinColumn(name = "user_id")
     private User user;
     // ---------------------------------
 

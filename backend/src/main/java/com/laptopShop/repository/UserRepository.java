@@ -7,6 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    // Chỉ cần viết dòng này, Spring Boot tự động viết câu lệnh SQL "SELECT * FROM users WHERE username = ?" cho bạn
     Optional<User> findByUsername(String username);
 }

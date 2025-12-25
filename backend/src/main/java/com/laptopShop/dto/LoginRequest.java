@@ -1,10 +1,9 @@
-package com.laptopShop.dto; // <--- DÒNG NÀY PHẢI ĐÚNG VỚI TÊN PACKAGE CỦA BẠN
+package com.laptopShop.dto;
 
 public class LoginRequest {
     private String username;
     private String password;
 
-    // Getter và Setter (Bắt buộc)
     public String getUsername() {
         return username;
     }

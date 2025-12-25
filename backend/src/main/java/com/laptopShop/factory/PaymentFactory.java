@@ -15,8 +15,7 @@ public class PaymentFactory {
     // --- SỬA TÊN HÀM TỪ getPaymentService THÀNH getService ---
     public IPaymentService getService(String paymentType) {
 
-        // paymentType gửi lên là "COD" hoặc "BANKING"
-        // Spring sẽ tự tìm Bean có tên tương ứng trong Map
+
         IPaymentService service = paymentServices.get(paymentType);
 
         if (service == null) {

@@ -5,10 +5,10 @@ const Headers = () => {
     const history = useHistory();
     const [currentUser, setCurrentUser] = useState(null);
     
-    // Biến state để kiểm soát việc ẩn/hiện menu
+
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    // Lấy thông tin user khi tải trang
+
     useEffect(() => {
         const userStored = localStorage.getItem("user");
         if (userStored) {
@@ -20,17 +20,13 @@ const Headers = () => {
         }
     }, []);
 
-    // Hàm xử lý đăng xuất
-    // js/Headers.js
 
       const handleLogout = (e) => {
           e.preventDefault();
           localStorage.removeItem("user");
           localStorage.removeItem("isLoggedIn");
           
-          // --- SỬA DÒNG NÀY ---
-          // Cũ: window.location.href = "/";
-          // Mới: Về trang chủ và tải lại
+
           window.location.hash = "/";
           window.location.reload();
       };
@@ -71,16 +67,16 @@ const Headers = () => {
                     </div>
                 </div>
 
-                {/* Khu vực bên phải */}
+
                 <div className="topRight">
                     <div className="contact">          
                         <Link to="/contact">Liên hệ</Link>
                     </div>
 
-                    {/* --- PHẦN TÀI KHOẢN (ĐÃ SỬA) --- */}
+
                     <div className="account">        
                         {currentUser ? (
-                            // 1. NẾU ĐÃ ĐĂNG NHẬP
+
                             <div className="account-wrapper" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                                 
                                 {/* Tên người dùng để bấm vào */}
@@ -90,11 +86,11 @@ const Headers = () => {
                                     <i className={`fa-solid fa-caret-${isDropdownOpen ? 'up' : 'down'}`}></i>
                                 </div>
 
-                                {/* Menu thả xuống (Chỉ hiện khi isDropdownOpen = true) */}
+
                                 {isDropdownOpen && (
                                     <div className="user-dropdown">
                                         
-                                        {/* Link đến trang Hồ Sơ (Cần tạo file Profile.js sau này) */}
+
                                         <Link to="/profile" className="dropdown-item">
                                             <i className="fa-solid fa-id-card"></i> Hồ sơ của tôi
                                         </Link>
@@ -103,7 +99,7 @@ const Headers = () => {
                                             <i className="fa-solid fa-box-open"></i> Đơn mua
                                         </Link>
 
-                                        {/* Nút Đăng Xuất nằm trong này */}
+
                                         <a href="#" className="dropdown-item logout-btn" onClick={handleLogout}>
                                             <i className="fa-solid fa-right-from-bracket"></i> Đăng xuất
                                         </a>
@@ -111,7 +107,7 @@ const Headers = () => {
                                 )}
                             </div>
                         ) : (
-                            // 2. NẾU CHƯA ĐĂNG NHẬP
+
                             <Link to="/login">
                                 <i className="fa-solid fa-circle-user" style={{marginRight: '5px'}}></i>
                                 Đăng nhập        

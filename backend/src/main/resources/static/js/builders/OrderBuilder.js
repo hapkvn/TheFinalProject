@@ -1,4 +1,4 @@
-// File: js/builders/OrderBuilder.js
+
 
 class OrderBuilder {
     constructor() {
@@ -34,5 +34,4 @@ class OrderBuilder {
     }
 }
 
-// Gán vào window để file Checkout.js có thể nhìn thấy
 window.OrderBuilder = OrderBuilder;

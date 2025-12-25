@@ -8,10 +8,9 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    // 1. Tìm đơn hàng theo Username (Cơ bản - Không sắp xếp)
     List<Order> findByUser_Username(String username);
 
-    // 2. Tìm theo User ID
+
     List<Order> findByUserId(Long userId);
 
 

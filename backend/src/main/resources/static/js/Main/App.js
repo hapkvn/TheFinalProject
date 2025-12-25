@@ -5,7 +5,7 @@ const MainLayout = () => {
     const location = useLocation();
     const currentPath = location.pathname.toLowerCase();
     
-    // Các trang không hiện Menu
+
     const noMenuPaths = ['/login', '/register', '/cart', '/contact', '/profile', '/orders', '/checkout'];
     const showMenu = !noMenuPaths.includes(currentPath);
 
@@ -16,16 +16,12 @@ const MainLayout = () => {
                 <window.Headers />
 
                 <div className="main-container">
-                    {/* Menu bên trái */}
                     {showMenu && (
                         <div style={{flex: '0 0 250px'}}>
                             <window.Menu />
                         </div>
                     )}
-
-                    {/* Nội dung chính */}
                     <div style={{flex: 1}}>
-                        {/* CÚ PHÁP V5: Dùng Switch */}
                         <Switch>
                             <Route exact path="/" component={window.Home} />
                             <Route path="/products" component={window.Products} />
