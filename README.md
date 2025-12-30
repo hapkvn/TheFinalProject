@@ -1,4 +1,10 @@
-# Java-Web-Project
+#Đề tài: TẠO WEBSITE BÁN HÀNG
+#lỚP IT380.4
+#Thành viên
+#A44254 - Nguyễn Quang Huy
+#A47779 - Dương Kim Tài   
+#A48687 – Lê Huy Đạt 
+#A47113-Lưu Huy Hoàng 
 
 
 ---Cách Clone dự án về máy:
