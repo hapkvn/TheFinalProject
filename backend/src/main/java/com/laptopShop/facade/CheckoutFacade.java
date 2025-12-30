@@ -27,18 +27,14 @@ public class CheckoutFacade {
 
         List<Cart> cartItems = cartService.getMyCart(username);
         if(cartItems.isEmpty()) throw new RuntimeException("Giỏ hàng trống!");
-
         Order order = new Order();
-
         order.setUser(user);
-
-
         order.setFullname(user.getFullName()); // Lưu tên người nhận
         order.setAddress(address);
         order.setPhone(phone);
         order.setPaymentMethod(paymentMethod);
 
-        // Tính tổng tiền
+
         double total = cartItems.stream()
                 .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
                 .sum();

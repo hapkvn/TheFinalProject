@@ -1,6 +1,6 @@
 package com.laptopShop.entity;
 
-import jakarta.persistence.*; // Nếu dùng Spring Boot cũ (<3.0) thì đổi thành javax.persistence.*
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -13,11 +13,11 @@ public class OrderDetail {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order order; // Cái này khớp với mappedBy="order" bên file Order
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product product; // Đảm bảo bạn đã có class Product trong entity
+    private Product product;
 
     private Double price;
 

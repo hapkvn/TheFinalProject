@@ -3,7 +3,7 @@ package com.laptopShop.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users") // Phải trùng tên với bảng trong SQL
+@Table(name = "users")
 public class User {
 
     @Id
@@ -15,7 +15,6 @@ public class User {
     private String fullName;
     private String role;
 
-    // --- GETTER & SETTER (Bắt buộc) ---
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

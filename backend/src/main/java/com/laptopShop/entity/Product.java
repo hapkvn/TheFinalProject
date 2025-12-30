@@ -23,7 +23,6 @@ public class Product {
 
     private String status;
 
-    // --- THÊM DÒNG NÀY ---
     @Column(columnDefinition = "integer default 10")
     private Integer stock;
 }
